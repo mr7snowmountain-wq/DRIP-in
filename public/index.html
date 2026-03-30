@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Drip'In">
+<meta name="theme-color" content="#000000">
+<meta property="og:title" content="Drip'In — L'IA qui voit ce que tu portes">
+<meta property="og:description" content="Ton styliste IA personnel. Photo → analyse complète → conseils pro.">
+<link rel="manifest" href="/manifest.json">
+<title>Drip'In — L'IA qui voit ce que tu portes</title>
+<link rel="preload" as="image" href="/images/minimal_1.webp">
+<link rel="preload" as="image" href="/images/street_6.webp">
+<link rel="preload" as="image" href="/images/oldmoney_5.webp">
+<link rel="preload" as="image" href="/images/paris_3.webp">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{--black:#000;--dark:#121A1C;--gray:#6C6C6C;--lg:#ebebeb;--white:#fff;--bg:#f2f2f2;--accent:#c9a96e}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-content:center;align-items:center}
+.frame{width:390px;height:844px;background:var(--white);border-radius:48px;border:8px solid #e0e0e0;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.12);display:flex;flex-direction:column}
+.notch{width:110px;height:28px;background:#d8d8d8;border-radius:0 0 18px 18px;margin:0 auto;flex-shrink:0}
+@media(max-width:500px){
+  body{background:var(--white);align-items:flex-start}
+  .frame{width:100vw;height:100vh;height:100dvh;border-radius:0;border:none;box-shadow:none}
+  .notch{display:none}
+}
+.screen{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.page{display:none;flex:1;flex-direction:column;overflow:hidden}
+.page.on{display:flex;animation:fadeUp .22s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.scr{overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
+.scr::-webkit-scrollbar{width:0}
+
+/* NAV */
+.nav{display:flex;justify-content:space-around;padding:.55rem .5rem .75rem;background:var(--white);border-top:.5px solid var(--lg);flex-shrink:0}
+.ni{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;opacity:.25;border:none;background:none;transition:.2s;padding:.25rem .75rem;border-radius:12px}
+.ni.on{opacity:1}
+.ni .ic{font-size:19px}
+.ni .lb{font-size:8px;font-weight:700;letter-spacing:.8px;color:var(--black);font-family:'Bebas Neue'}
+
+/* ══ ONBOARDING ══ */
+.ob{flex:1;background:var(--white);display:flex;flex-direction:column;overflow:hidden}
+.ob-mosaic{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:5px;padding:5px;flex:1;min-height:0}
+.ob-cell{border-radius:16px;overflow:hidden;background:#f0ede8}
+.ob-cell img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:.4s}
+.ob-cell:hover img{transform:scale(1.04)}
+.ob-bottom{padding:1.25rem 1.5rem 1.75rem;flex-shrink:0;background:var(--white)}
+.ob-eyebrow{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem;font-weight:600}
+.ob-logo{font-family:'Bebas Neue';font-size:46px;color:var(--black);letter-spacing:1px;line-height:1;margin-bottom:.1rem}
+.ob-logo span{color:var(--accent)}
+.ob-tagline{font-size:11px;color:var(--gray);margin-bottom:.9rem;font-style:italic}
+.ob-btn{background:var(--black);color:var(--white);border:none;border-radius:50px;padding:.88rem 1.75rem;font-family:'Bebas Neue';font-size:21px;letter-spacing:1px;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:space-between;transition:.15s}
+.ob-btn:hover{background:#222}
+.ob-arr{opacity:.4;font-size:15px;letter-spacing:-2px}
+
+/* ══ STEP HEADER ══ */
+.shdr{padding:.85rem 1.5rem .55rem;border-bottom:.5px solid var(--lg);flex-shrink:0;background:var(--white)}
+.srow{display:flex;align-items:center;justify-content:space-between;margin-bottom:.2rem}
+.stitle{font-family:'Bebas Neue';font-size:25px;letter-spacing:.5px}
+.snum{font-size:10.5px;font-weight:600;color:var(--gray)}
+.ssub{font-size:11px;color:var(--gray);margin-bottom:.55rem}
+.prog{display:flex;gap:4px}
+.pb{height:3px;flex:1;border-radius:2px;background:#e8e8e8;transition:.4s}
+.pb.done{background:var(--black)}
+
+/* ══ GALLERY ══ */
+.tabs{display:flex;gap:.3rem;padding:.6rem 1.5rem;overflow-x:auto;flex-shrink:0;background:var(--white)}
+.tabs::-webkit-scrollbar{width:0;height:0}
+.tb{padding:5px 13px;border-radius:50px;font-size:10.5px;font-weight:600;border:1px solid #e5e5e5;color:var(--gray);cursor:pointer;white-space:nowrap;flex-shrink:0;background:var(--white);transition:.12s}
+.tb.on{background:var(--black);color:var(--white);border-color:var(--black)}
+.gg{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px 1.25rem 1.25rem}
+.gc{border-radius:16px;overflow:hidden;position:relative;cursor:pointer;height:195px;background:#f0ede8;border:2.5px solid transparent;transition:border-color .15s}
+.gc.big{grid-column:span 2;height:210px}
+.gc.chosen{border-color:var(--black)}
+.gc img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:.35s}
+.gc:hover img{transform:scale(1.04)}
+.gc-lbl{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.72));padding:.55rem .75rem .5rem;z-index:2}
+.gc-name{font-family:'Bebas Neue';font-size:14px;color:#fff;letter-spacing:.5px}
+.gc-sub{font-size:9px;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.5px;font-weight:500}
+.gc-pick{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.93);border:none;border-radius:50px;font-size:9.5px;font-weight:700;padding:4px 10px;cursor:pointer;z-index:2}
+.gc.chosen .gc-pick{background:var(--black);color:var(--white)}
+.cat-lbl{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.52);border-radius:50px;font-size:9px;font-weight:700;padding:3px 9px;z-index:2;color:#fff;letter-spacing:.3px;font-family:'Bebas Neue'}
+.ph-card{border-radius:16px;height:195px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;cursor:pointer;border:2.5px solid transparent}
+.ph-ic{font-size:38px;margin-bottom:.35rem}
+.ph-name{font-family:'Bebas Neue';font-size:15px;color:#fff;letter-spacing:.5px}
+.ph-sub{font-size:9px;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.5px;font-weight:500}
+.ph-soon{position:absolute;bottom:8px;right:8px;background:rgba(255,255,255,.85);border-radius:50px;font-size:8.5px;font-weight:700;padding:3px 9px;color:#333}
+
+/* ══ CRITERIA ══ */
+.crit-bd{padding:.9rem 1.5rem;display:flex;flex-direction:column;gap:1.1rem}
+.cl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray);margin-bottom:.45rem}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{padding:5px 12px;border-radius:50px;font-size:11px;font-weight:500;border:1px solid #e5e5e5;color:var(--gray);cursor:pointer;background:var(--white);transition:.12s;user-select:none}
+.chip.on{background:var(--black);color:var(--white);border-color:var(--black)}
+.chip:active{transform:scale(.96)}
+.rng-wrap{display:flex;flex-direction:column;gap:5px}
+.rng-wrap .rl{font-size:11px;color:var(--gray);display:flex;justify-content:space-between}
+.rng-wrap .rl b{color:var(--black);font-weight:700;font-size:13px}
+input[type=range]{width:100%;accent-color:var(--black)}
+
+/* ══ UPLOAD ══ */
+.up-bd{padding:.9rem 1.5rem;display:flex;flex-direction:column;gap:.8rem}
+.pp-pill{display:flex;align-items:center;gap:.65rem;background:#f8f8f8;border-radius:12px;padding:.75rem 1rem}
+.pp-av{width:34px;height:34px;border-radius:50%;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue';font-size:15px;flex-shrink:0}
+.pp-b{font-size:12.5px;font-weight:700;display:block}
+.pp-s{font-size:10.5px;color:var(--gray)}
+.hint-box{background:#fff8ee;border:1px solid #ffe0a0;border-radius:12px;padding:.75rem 1rem}
+.hint-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#b07800;margin-bottom:.25rem}
+.hint-txt{font-size:11px;color:#7a5200;line-height:1.55}
+.dz{border:2px dashed #ddd;border-radius:16px;padding:2.25rem 1.25rem;text-align:center;cursor:pointer;background:#fafafa;display:flex;flex-direction:column;align-items:center;gap:.4rem;transition:.15s}
+.dz:hover,.dz.drag{border-color:var(--black);background:#f5f5f5}
+.dz-ic{font-size:32px}
+.dz-h{font-family:'Bebas Neue';font-size:21px;letter-spacing:.5px}
+.dz-s{font-size:11px;color:var(--gray);line-height:1.5}
+.dz-hint{font-size:10.5px;color:var(--accent);font-weight:600}
+.pvws{display:flex;flex-direction:column;gap:.65rem}
+.pvw{position:relative;border-radius:16px;overflow:hidden;border:.5px solid #e8e8e8;animation:fadeUp .2s ease}
+.pvw img{width:100%;max-height:225px;object-fit:cover;display:block}
+.pvw-lbl{position:absolute;top:9px;left:9px;background:rgba(0,0,0,.6);color:#fff;font-size:9.5px;font-weight:700;padding:3px 10px;border-radius:50px;font-family:'Bebas Neue';letter-spacing:.5px}
+.pvw-rm{position:absolute;top:9px;right:9px;background:rgba(0,0,0,.65);color:#fff;border:none;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center}
+.add-more{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.65rem;border:1.5px dashed #e0e0e0;border-radius:12px;cursor:pointer;font-size:12px;font-weight:600;color:var(--gray);background:#fafafa;transition:.12s}
+.add-more:hover{border-color:var(--black);color:var(--black)}
+input[type=file]{display:none}
+
+/* ══ FOOTER ══ */
+.foot{padding:.8rem 1.5rem;border-top:.5px solid var(--lg);flex-shrink:0;background:var(--white)}
+.btn{width:100%;background:var(--black);color:var(--white);border:none;border-radius:50px;padding:.82rem;font-family:'Bebas Neue';font-size:20px;letter-spacing:1px;cursor:pointer;transition:.15s}
+.btn:hover{background:#222}
+.btn:disabled{opacity:.3;cursor:not-allowed}
+.btn:active{transform:scale(.98)}
+
+/* ══ LOADING ══ */
+.ld{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:2rem;text-align:center}
+.ld-logo{font-family:'Bebas Neue';font-size:28px;letter-spacing:1px;color:var(--black);margin-bottom:.25rem}
+.ld-logo span{color:var(--accent)}
+.ld-ic{font-size:44px;animation:spin 3s linear infinite;display:block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ld-h{font-family:'Bebas Neue';font-size:22px;letter-spacing:.5px}
+.ld-s{font-size:11.5px;color:var(--gray);line-height:1.6;max-width:230px}
+.ld-bar{width:180px;height:3px;background:#e8e8e8;border-radius:2px;overflow:hidden}
+.ld-fill{height:100%;background:var(--black);border-radius:2px;transition:width .4s ease}
+.dots{display:flex;gap:5px;margin-top:.5rem}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--black);animation:bop .7s infinite}
+.dot:nth-child(2){animation-delay:.15s}
+.dot:nth-child(3){animation-delay:.3s}
+@keyframes bop{0%,80%,100%{opacity:.15;transform:scale(.75)}40%{opacity:1;transform:scale(1)}}
+
+/* ══ RESULTS ══ */
+.res-hdr{background:var(--dark);padding:1.2rem 1.5rem;flex-shrink:0}
+.res-bk{font-size:11px;color:rgba(255,255,255,.4);cursor:pointer;margin-bottom:.35rem;display:flex;align-items:center;gap:4px}
+.res-top{display:flex;align-items:flex-end;justify-content:space-between}
+.res-t{font-size:13px;letter-spacing:2px;color:rgba(255,255,255,.5);text-transform:uppercase;margin-bottom:.2rem}
+.res-brand{font-family:'Bebas Neue';font-size:26px;color:var(--white);letter-spacing:.5px}
+.res-brand span{color:var(--accent)}
+.res-num{font-family:'Bebas Neue';font-size:50px;line-height:1}
+.res-den{font-size:11px;color:rgba(255,255,255,.35)}
+.res-verdict{font-size:11.5px;color:rgba(255,255,255,.62);margin-top:.4rem;font-style:italic;line-height:1.5}
+.res-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:.65rem}
+.rtag{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.75);font-size:9px;padding:3px 9px;border-radius:50px;font-weight:500}
+.res-bd{padding:1.2rem 1.5rem;display:flex;flex-direction:column;gap:1rem}
+.rsec{font-family:'Bebas Neue';font-size:16px;letter-spacing:.5px;margin-bottom:.5rem}
+.sc-grid{display:flex;flex-direction:column;gap:.5rem}
+.sc-row{display:flex;align-items:center;gap:.5rem}
+.sc-l{font-size:10px;color:var(--gray);width:118px;flex-shrink:0;line-height:1.3}
+.sc-track{flex:1;height:5px;background:#f0f0f0;border-radius:3px;overflow:hidden}
+.sc-fill{height:100%;background:var(--dark);border-radius:3px;transition:width 1s ease}
+.sc-v{font-size:11.5px;font-weight:700;width:22px;text-align:right}
+.fbl{display:flex;flex-direction:column;gap:.55rem}
+.fbi{display:flex;gap:.55rem;font-size:12px;line-height:1.55;align-items:flex-start}
+.fbi-ic{flex-shrink:0;margin-top:1px;font-size:13px}
+.conseil{background:var(--dark);border-radius:16px;padding:1.1rem 1.25rem}
+.conseil-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:.35rem}
+.conseil-txt{font-size:12px;color:rgba(255,255,255,.9);line-height:1.7}
+.q-box{background:#f8f5f0;border:1px solid #e8ddd0;border-radius:14px;padding:.9rem 1rem}
+.q-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent);margin-bottom:.3rem}
+.q-txt{font-size:12px;line-height:1.65;color:var(--black)}
+.piece-card{background:#f8f8f8;border-radius:12px;padding:.75rem .9rem;border-left:3px solid var(--black)}
+.piece-n{font-size:9px;font-weight:700;letter-spacing:.8px;color:var(--gray);margin-bottom:2px;text-transform:uppercase}
+.piece-name{font-size:12.5px;font-weight:700;margin-bottom:2px}
+.piece-why{font-size:11px;color:var(--gray);line-height:1.4}
+.piece-shop{font-size:11px;color:var(--accent);font-weight:600;margin-top:4px}
+.lb-box{background:#f8f8f8;border-radius:12px;padding:.9rem 1rem;font-size:12px;line-height:1.65}
+.divider{height:.5px;background:var(--lg)}
+.err-box{background:#fff0f0;border:1px solid #fcc;border-radius:12px;padding:1rem;font-size:12px;color:#c00;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="notch"></div>
+  <div class="screen">
+
+    <!-- ══ ONBOARDING ══ -->
+    <div class="page on" id="pg-ob">
+      <div class="ob">
+        <div class="ob-mosaic">
+          <div class="ob-cell"><img src="/images/minimal_1.webp" alt="Minimal" loading="eager"></div>
+          <div class="ob-cell"><img src="/images/street_6.webp" alt="Street" loading="eager"></div>
+          <div class="ob-cell"><img src="/images/oldmoney_5.webp" alt="Old Money" loading="eager"></div>
+          <div class="ob-cell"><img src="/images/paris_3.webp" alt="Paris" loading="eager"></div>
+        </div>
+        <div class="ob-bottom">
+          <div class="ob-eyebrow">AI Style Coach · Mode Expert</div>
+          <div class="ob-logo">DRIP<span>'</span>IN</div>
+          <div class="ob-tagline">"L'IA qui voit ce que tu portes."</div>
+          <button class="ob-btn" onclick="go('pg-gal')">
+            <span>GET STARTED</span>
+            <span class="ob-arr">› › ›</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ GALERIE ══ -->
+    <div class="page" id="pg-gal">
+      <div class="shdr">
+        <div class="srow"><div class="stitle">EXPLORE LES STYLES</div><div class="snum">1 / 3</div></div>
+        <div class="ssub">Choisis les univers qui t'inspirent</div>
+        <div class="prog"><div class="pb done"></div><div class="pb"></div><div class="pb"></div></div>
+      </div>
+      <div class="tabs" id="tabs">
+        <div class="tb on" onclick="ft(this,'all')">Tous</div>
+        <div class="tb" onclick="ft(this,'minimal')">Minimaliste</div>
+        <div class="tb" onclick="ft(this,'street')">Streetwear</div>
+        <div class="tb" onclick="ft(this,'money')">Old Money</div>
+        <div class="tb" onclick="ft(this,'paris')">Parisien</div>
+        <div class="tb" onclick="ft(this,'boho')">Boho</div>
+        <div class="tb" onclick="ft(this,'y2k')">Y2K</div>
+        <div class="tb" onclick="ft(this,'dark')">Dark Academia</div>
+        <div class="tb" onclick="ft(this,'sport')">Sporty</div>
+        <div class="tb" onclick="ft(this,'vintage')">Vintage</div>
+        <div class="tb" onclick="ft(this,'cottage')">Cottagecore</div>
+        <div class="tb" onclick="ft(this,'biz')">Business</div>
+      </div>
+      <div class="scr"><div class="gg" id="gg"></div></div>
+      <div class="foot"><button class="btn" id="btn-gal" disabled onclick="go('pg-crit')">SUIVANT →</button></div>
+    </div>
+
+    <!-- ══ CRITÈRES ══ -->
+    <div class="page" id="pg-crit">
+      <div class="shdr">
+        <div class="srow"><div class="stitle">TON PROFIL</div><div class="snum">2 / 3</div></div>
+        <div class="ssub">Affine l'analyse Drip'In</div>
+        <div class="prog"><div class="pb done"></div><div class="pb done"></div><div class="pb"></div></div>
+      </div>
+      <div class="scr"><div class="crit-bd">
+        <div><div class="cl">Occasion</div><div class="chips" id="c-occ">
+          <div class="chip on" onclick="pick(this,'c-occ')">Quotidien</div>
+          <div class="chip" onclick="pick(this,'c-occ')">Travail / Bureau</div>
+          <div class="chip" onclick="pick(this,'c-occ')">Soirée</div>
+          <div class="chip" onclick="pick(this,'c-occ')">Week-end</div>
+          <div class="chip" onclick="pick(this,'c-occ')">Date romantique</div>
+          <div class="chip" onclick="pick(this,'c-occ')">Voyage</div>
+          <div class="chip" onclick="pick(this,'c-occ')">Événement</div>
+        </div></div>
+        <div><div class="cl">Morphologie</div><div class="chips" id="c-mor">
+          <div class="chip on" onclick="pick(this,'c-mor')">Sablier</div>
+          <div class="chip" onclick="pick(this,'c-mor')">Rectangle</div>
+          <div class="chip" onclick="pick(this,'c-mor')">Poire</div>
+          <div class="chip" onclick="pick(this,'c-mor')">Pomme</div>
+          <div class="chip" onclick="pick(this,'c-mor')">Triangle inversé</div>
+        </div></div>
+        <div><div class="cl">Palette préférée</div><div class="chips" id="c-pal">
+          <div class="chip on" onclick="pick(this,'c-pal')">Neutres / Beige</div>
+          <div class="chip" onclick="pick(this,'c-pal')">Monochromes</div>
+          <div class="chip" onclick="pick(this,'c-pal')">Tons terreux</div>
+          <div class="chip" onclick="pick(this,'c-pal')">Pastels</div>
+          <div class="chip" onclick="pick(this,'c-pal')">Couleurs vives</div>
+          <div class="chip" onclick="pick(this,'c-pal')">Dark / Sombres</div>
+        </div></div>
+        <div><div class="cl">Saison</div><div class="chips" id="c-sai">
+          <div class="chip" onclick="pick(this,'c-sai')">Printemps</div>
+          <div class="chip" onclick="pick(this,'c-sai')">Été</div>
+          <div class="chip on" onclick="pick(this,'c-sai')">Automne</div>
+          <div class="chip" onclick="pick(this,'c-sai')">Hiver</div>
+        </div></div>
+        <div><div class="cl">Ma question principale</div><div class="chips" id="c-q">
+          <div class="chip on" onclick="pick(this,'c-q')">J'hésite entre plusieurs pièces</div>
+          <div class="chip" onclick="pick(this,'c-q')">Je sais pas quoi mettre avec ça</div>
+          <div class="chip" onclick="pick(this,'c-q')">Corriger mon look global</div>
+          <div class="chip" onclick="pick(this,'c-q')">Adapter à l'occasion</div>
+          <div class="chip" onclick="pick(this,'c-q')">Trouver les pièces manquantes</div>
+        </div></div>
+        <div><div class="cl">Niveau d'audace</div><div class="rng-wrap">
+          <label class="rl">Classique <b id="vaud">5</b>/10 Audacieux</label>
+          <input type="range" min="1" max="10" value="5" id="r-aud" oninput="document.getElementById('vaud').textContent=this.value">
+        </div></div>
+        <div><div class="cl">Budget suggestions</div><div class="chips" id="c-bud">
+          <div class="chip" onclick="pick(this,'c-bud')">Abordable</div>
+          <div class="chip on" onclick="pick(this,'c-bud')">Mid-range</div>
+          <div class="chip" onclick="pick(this,'c-bud')">Premium</div>
+          <div class="chip" onclick="pick(this,'c-bud')">Luxe</div>
+        </div></div>
+        <div><div class="cl">Inspirations marques</div><div class="chips" id="c-ins">
+          <div class="chip" onclick="tog(this)">Zara</div>
+          <div class="chip on" onclick="tog(this)">A.P.C</div>
+          <div class="chip" onclick="tog(this)">Sandro</div>
+          <div class="chip" onclick="tog(this)">Jacquemus</div>
+          <div class="chip" onclick="tog(this)">COS</div>
+          <div class="chip" onclick="tog(this)">Toteme</div>
+          <div class="chip" onclick="tog(this)">Carhartt</div>
+          <div class="chip" onclick="tog(this)">Nike</div>
+          <div class="chip" onclick="tog(this)">Ralph Lauren</div>
+        </div></div>
+      </div></div>
+      <div class="foot"><button class="btn" onclick="go('pg-up')">ENVOYER MES PHOTOS →</button></div>
+    </div>
+
+    <!-- ══ UPLOAD ══ -->
+    <div class="page" id="pg-up">
+      <div class="shdr">
+        <div class="srow"><div class="stitle">TES PHOTOS</div><div class="snum">3 / 3</div></div>
+        <div class="ssub">Outfit complet ou pièces sur lesquelles tu hésites</div>
+        <div class="prog"><div class="pb done"></div><div class="pb done"></div><div class="pb done"></div></div>
+      </div>
+      <div class="scr"><div class="up-bd">
+        <div class="pp-pill">
+          <div class="pp-av" id="pp-av">D</div>
+          <div><b class="pp-b" id="pp-b">Mon style</b><span class="pp-s" id="pp-s">Profil Drip'In</span></div>
+        </div>
+        <div class="hint-box">
+          <div class="hint-lbl">💡 Pour une analyse optimale</div>
+          <div class="hint-txt">Photo en pied · Bonne lumière naturelle · Envoie les pièces sur lesquelles tu hésites</div>
+        </div>
+        <input type="file" id="fi" accept="image/*" multiple onchange="handleFiles(event)">
+        <div class="dz" id="dz" onclick="document.getElementById('fi').click()">
+          <div class="dz-ic">📸</div>
+          <div class="dz-h">AJOUTE TES PHOTOS</div>
+          <div class="dz-s">Ton outfit · Tes hésitations · Tes pièces</div>
+          <div class="dz-hint">Jusqu'à 3 photos acceptées</div>
+        </div>
+        <div class="pvws" id="pvws" style="display:none"></div>
+        <div class="add-more" id="add-more" style="display:none" onclick="document.getElementById('fi').click()">
+          <span style="font-size:18px">+</span> Ajouter une autre photo
+        </div>
+      </div></div>
+      <div class="foot"><button class="btn" id="btn-analyze" disabled onclick="startAnalysis()">ANALYSER MON STYLE →</button></div>
+    </div>
+
+    <!-- ══ LOADING ══ -->
+    <div class="page" id="pg-load">
+      <div class="ld">
+        <div class="ld-logo">DRIP<span>'</span>IN</div>
+        <div class="ld-ic">✦</div>
+        <div class="ld-h">ANALYSE EN COURS</div>
+        <div class="ld-s" id="ld-s">Ton styliste IA étudie chaque détail…</div>
+        <div class="ld-bar"><div class="ld-fill" id="ld-fill"></div></div>
+        <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      </div>
+    </div>
+
+    <!-- ══ RÉSULTATS ══ -->
+    <div class="page" id="pg-res">
+      <div class="res-hdr">
+        <div class="res-bk" onclick="resetUp()">‹ Nouvelle analyse</div>
+        <div class="res-top">
+          <div>
+            <div class="res-t">Analyse par</div>
+            <div class="res-brand">DRIP<span>'</span>IN</div>
+          </div>
+          <div style="text-align:right">
+            <div class="res-num" id="r-note">—</div>
+            <div class="res-den">/10</div>
+          </div>
+        </div>
+        <div class="res-verdict" id="r-verd">—</div>
+        <div class="res-tags" id="r-tags"></div>
+      </div>
+      <div class="scr"><div class="res-bd" id="res-bd"></div></div>
+    </div>
+
+  </div>
+
+  <div id="navbar" style="display:none" class="nav">
+    <button class="ni on" id="nb-up" onclick="navTo('pg-up','nb-up')"><span class="ic">📸</span><span class="lb">ANALYSE</span></button>
+    <button class="ni" id="nb-gal" onclick="navTo('pg-gal','nb-gal')"><span class="ic">✦</span><span class="lb">STYLES</span></button>
+    <button class="ni" id="nb-crit" onclick="navTo('pg-crit','nb-crit')"><span class="ic">⚙</span><span class="lb">PROFIL</span></button>
+  </div>
+</div>
+
+<script>
+const GAL = [
+  {id:'m1',name:'Minimal Chic',sub:'Neutral · Oversized',cat:'minimal',big:true,img:'/images/minimal_1.webp'},
+  {id:'m2',name:'Quiet Luxury',sub:'Tones doux',cat:'minimal',big:false,img:'/images/minimal_2.webp'},
+  {id:'m3',name:'Clean Lines',sub:'Beige · Blanc',cat:'minimal',big:false,img:'/images/minimal_3.webp'},
+  {id:'m4',name:'Power Blazer',sub:'Camel · Black',cat:'minimal',big:false,img:'/images/minimal_4.webp'},
+  {id:'m5',name:'Soft Neutral',sub:'Tone sur tone',cat:'minimal',big:true,img:'/images/minimal_5.webp'},
+  {id:'sw1',name:'Street NYC',sub:'Urban · Racing',cat:'street',big:false,img:'/images/street_1.webp'},
+  {id:'sw2',name:'Hoodie Cargo',sub:'Oversized · Relaxed',cat:'street',big:true,img:'/images/street_2.webp'},
+  {id:'sw3',name:'Color Block',sub:'Bold · Street',cat:'street',big:false,img:'/images/street_3.webp'},
+  {id:'sw4',name:'Crop Cargo',sub:'Urban · Chic',cat:'street',big:false,img:'/images/street_4.webp'},
+  {id:'sw5',name:'Monochrome',sub:'All Green',cat:'street',big:false,img:'/images/street_5.webp'},
+  {id:'sw6',name:'Puffer Cream',sub:'Cozy · Street',cat:'street',big:true,img:'/images/street_6.webp'},
+  {id:'sw7',name:'Military Drip',sub:'Camo · Boots',cat:'street',big:false,img:'/images/street_7.webp'},
+  {id:'sw8',name:'Layered Look',sub:'Urban · Cool',cat:'street',big:false,img:'/images/street_8.webp'},
+  {id:'om1',name:'Camel Coat',sub:'Chelsea · Gold',cat:'money',big:true,img:'/images/oldmoney_1.webp'},
+  {id:'om2',name:'All Green',sub:'Monochrome luxe',cat:'money',big:false,img:'/images/oldmoney_2.webp'},
+  {id:'om3',name:'Dark Wool',sub:'Turtleneck · Bag',cat:'money',big:false,img:'/images/oldmoney_3.webp'},
+  {id:'om4',name:'Brown Suit',sub:'Tailored · Crisp',cat:'money',big:false,img:'/images/oldmoney_4.webp'},
+  {id:'om5',name:'Camel Long',sub:'Tone sur tone',cat:'money',big:true,img:'/images/oldmoney_5.webp'},
+  {id:'pa1',name:'Paris Brun',sub:'Beret · YSL',cat:'paris',big:true,img:'/images/paris_1.webp'},
+  {id:'pa2',name:'Cafe Paris',sub:'Beret · Trench',cat:'paris',big:false,img:'/images/paris_2.webp'},
+  {id:'pa3',name:'Tour Eiffel',sub:'Camel · Bottes',cat:'paris',big:false,img:'/images/paris_3.webp'},
+  {id:'pa4',name:'Seine Style',sub:'Noir · Beret rouge',cat:'paris',big:true,img:'/images/paris_4.webp'},
+];
+
+const PH = {
+  boho:{bg:'#c4a882',ic:'🌿',name:'Boho',sub:'Terre · Ocre · Fluide'},
+  y2k:{bg:'#c4507a',ic:'💿',name:'Y2K',sub:'Rose fluo · Taille basse'},
+  dark:{bg:'#2a2318',ic:'📚',name:'Dark Academia',sub:'Marron · Layering'},
+  sport:{bg:'#3a5cc4',ic:'⚡',name:'Sporty Chic',sub:'Bleu · Tracksuit'},
+  vintage:{bg:'#c4703a',ic:'🎞️',name:'Vintage',sub:'Rouille · Cognac'},
+  cottage:{bg:'#6a9e5a',ic:'🌸',name:'Cottagecore',sub:'Vert sauge · Lin'},
+  biz:{bg:'#2c4a7c',ic:'💼',name:'Business',sub:'Navy · Tailored'},
+};
+
+const CAT = {minimal:'MINIMAL',street:'STREET',money:'OLD MONEY',paris:'PARIS'};
+const S = {styles:[],occasion:'Quotidien',morpho:'Sablier',palette:'Neutres / Beige',saison:'Automne',question:"J'hésite entre plusieurs pièces",audace:5,budget:'Mid-range',inspos:['A.P.C'],imgs:[]};
+const chosen = new Set();
+
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const showNav=['pg-up','pg-gal','pg-crit','pg-res'].includes(id);
+  document.getElementById('navbar').style.display=showNav?'flex':'none';
+  if(id==='pg-up') updatePill();
+}
+function navTo(pg,nb){
+  go(pg);
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
+  document.getElementById(nb).classList.add('on');
+}
+function buildGal(filter){
+  const catLabel = CAT;
+  let items = filter==='all'?[...GAL]:GAL.filter(s=>s.cat===filter);
+  let html = items.map(s=>`
+    <div class="gc${s.big?' big':''}${chosen.has(s.id)?' chosen':''}" data-id="${s.id}" onclick="toggleCard(this,'${s.id}')">
+      <img src="${s.img}" alt="${s.name}" loading="lazy">
+      <div class="cat-lbl">${catLabel[s.cat]||s.cat.toUpperCase()}</div>
+      <button class="gc-pick" onclick="event.stopPropagation();toggleCard(this.closest('.gc'),'${s.id}')">${chosen.has(s.id)?'✓':'+ Choisir'}</button>
+      <div class="gc-lbl"><div class="gc-name">${s.name}</div><div class="gc-sub">${s.sub}</div></div>
+    </div>`).join('');
+  if(filter==='all'||Object.keys(PH).includes(filter)){
+    const phCats=filter==='all'?Object.keys(PH):[filter];
+    phCats.forEach(cat=>{
+      const p=PH[cat];if(!p)return;
+      html+=`<div class="ph-card" style="background:${p.bg}">
+        <div class="ph-ic">${p.ic}</div>
+        <div class="ph-name">${p.name}</div>
+        <div class="ph-sub">${p.sub}</div>
+        <div class="ph-soon">Photos bientôt</div>
+      </div>`;
+    });
+  }
+  document.getElementById('gg').innerHTML=html;
+}
+function toggleCard(el,id){
+  if(chosen.has(id)){chosen.delete(id);el.classList.remove('chosen')}
+  else{chosen.add(id);el.classList.add('chosen')}
+  S.styles=[...chosen].map(cid=>GAL.find(g=>g.id===cid)?.name).filter(Boolean);
+  document.getElementById('btn-gal').disabled=chosen.size===0;
+  el.querySelector('.gc-pick').textContent=chosen.has(id)?'✓':'+ Choisir';
+}
+function ft(el,cat){
+  document.querySelectorAll('#tabs .tb').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');buildGal(cat);
+}
+function pick(el,gid){
+  document.querySelectorAll('#'+gid+' .chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  const m={'c-occ':'occasion','c-mor':'morpho','c-pal':'palette','c-sai':'saison','c-q':'question','c-bud':'budget'};
+  if(m[gid])S[m[gid]]=el.textContent.trim();
+}
+function tog(el){
+  el.classList.toggle('on');
+  S.inspos=[...document.querySelectorAll('#c-ins .chip.on')].map(c=>c.textContent.trim());
+}
+function updatePill(){
+  const st=S.styles.length?S.styles.slice(0,2).join(' · '):'Mon style';
+  document.getElementById('pp-b').textContent=st;
+  document.getElementById('pp-s').textContent=S.morpho+' · '+S.palette+' · '+S.saison;
+  document.getElementById('pp-av').textContent=S.styles.length?S.styles[0][0]:'D';
+}
+function handleFiles(e){
+  const files=[...e.target.files].slice(0,3-S.imgs.length);
+  if(!files.length)return;
+  let loaded=0;
+  files.forEach(file=>{
+    const r=new FileReader();
+    r.onload=ev=>{
+      S.imgs.push({b64:ev.target.result.split(',')[1],url:ev.target.result});
+      loaded++;if(loaded===files.length)renderPvws();
+    };r.readAsDataURL(file);
+  });
+}
+function renderPvws(){
+  const labels=["Outfit principal","2ème pièce / hésitation","3ème pièce"];
+  document.getElementById('pvws').innerHTML=S.imgs.map((img,i)=>`
+    <div class="pvw">
+      <img src="${img.url}" alt="photo ${i+1}">
+      <div class="pvw-lbl">${labels[i]}</div>
+      <button class="pvw-rm" onclick="rmImg(${i})">✕</button>
+    </div>`).join('');
+  document.getElementById('pvws').style.display='flex';
+  document.getElementById('dz').style.display=S.imgs.length>=3?'none':'flex';
+  document.getElementById('add-more').style.display=S.imgs.length>0&&S.imgs.length<3?'flex':'none';
+  document.getElementById('btn-analyze').disabled=S.imgs.length===0;
+}
+function rmImg(i){
+  S.imgs.splice(i,1);
+  if(!S.imgs.length){
+    document.getElementById('pvws').style.display='none';
+    document.getElementById('dz').style.display='flex';
+    document.getElementById('add-more').style.display='none';
+    document.getElementById('btn-analyze').disabled=true;
+  } else renderPvws();
+}
+const dz=document.getElementById('dz');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag')});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');handleFiles({target:{files:e.dataTransfer.files}})});
+
+const LD_STEPS=[
+  "Identification des pièces et matières…",
+  "Analyse des couleurs et proportions…",
+  "Évaluation par rapport à ton profil…",
+  "Génération des conseils Drip'In…",
+  "Sélection des pièces manquantes…"
+];
+
+async function startAnalysis(){
+  if(!S.imgs.length)return;
+  S.audace=parseInt(document.getElementById('r-aud').value);
+  go('pg-load');
+  let pct=0,step=0;
+  const fill=document.getElementById('ld-fill');
+  const stepEl=document.getElementById('ld-s');
+  const timer=setInterval(()=>{
+    pct=Math.min(pct+2,88);fill.style.width=pct+'%';
+    if(pct%18<2&&step<LD_STEPS.length)stepEl.textContent=LD_STEPS[step++];
+  },220);
+  const sys=`Tu es Drip'In — styliste IA expert de mode, aussi précis et bienveillant qu'un vrai styliste professionnel.
+PROFIL: styles=${S.styles.join(', ')||'Non défini'}, occasion=${S.occasion}, morpho=${S.morpho}, palette=${S.palette}, saison=${S.saison}, question="${S.question}", audace=${S.audace}/10, budget=${S.budget}, inspos=${S.inspos.join(', ')||'Non précisé'}.
+${S.imgs.length>1?`L'utilisateur a envoyé ${S.imgs.length} photos — il hésite entre des pièces ou veut savoir comment les combiner. Réponds directement à cette question en priorité.`:''}`;
+  const content=[
+    ...S.imgs.map(img=>({type:'image',source:{type:'base64',media_type:'image/jpeg',data:img.b64}})),
+    {type:'text',text:`Analyse ces ${S.imgs.length} photo(s). JSON strict uniquement:\n{"note_globale":<0-10 décimal>,"verdict":"<accroche percutante de styliste>","tags":["t1","t2","t3","t4"],"scores":{"Cohérence stylistique":<0-10>,"Harmonie des couleurs":<0-10>,"Adaptation à l'occasion":<0-10>,"Valorisation morpho":<0-10>,"Qualité des matières":<0-10>,"Équilibre proportions":<0-10>,"Modernité tendance":<0-10>},"reponse_question":"<réponse directe et précise à: ${S.question}>","points_forts":["<précis 1>","<précis 2>","<précis 3>"],"a_ameliorer":["<actionnable 1>","<actionnable 2>","<actionnable 3>"],"conseil_stylist":"<conseil 4-5 phrases: pièces exactes, techniques styling, comment porter différemment>","regles_mode":["<règle 1>","<règle 2>"],"pieces_manquantes":[{"piece":"<nom>","pourquoi":"<explication>","shopping":"<marque + prix budget ${S.budget}>"},{"piece":"<p2>","pourquoi":"<e>","shopping":"<m+p>"},{"piece":"<p3>","pourquoi":"<e>","shopping":"<m+p>"}],"coup_de_coeur":"<la meilleure chose>","tendance_saison":"<positionnement tendances ${S.saison} 2024>"}`}
+  ];
+  try{
+    const res=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,system:sys,messages:[{role:'user',content}]})});
+    clearInterval(timer);fill.style.width='100%';
+    const data=await res.json();
+    if(data.error)throw new Error(data.error.message||JSON.stringify(data.error));
+    const d=JSON.parse(data.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim());
+    renderRes(d);
+    setTimeout(()=>{go('pg-res');document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));document.getElementById('nb-up').classList.add('on')},300);
+  }catch(err){
+    clearInterval(timer);
+    go('pg-res');
+    document.getElementById('res-bd').innerHTML=`<div class="err-box"><strong>Erreur Drip'In</strong><br>${err.message}<br><br>Vérifie que ta clé API Anthropic est configurée dans Vercel (ANTHROPIC_API_KEY).</div>`;
+    document.getElementById('r-note').textContent='!';
+    document.getElementById('r-verd').textContent='Connexion impossible';
+  }
+}
+
+function renderRes(d){
+  const nc=d.note_globale>=7?'#22c55e':d.note_globale>=5?'#f59e0b':'#ef4444';
+  document.getElementById('r-note').textContent=d.note_globale;
+  document.getElementById('r-note').style.color=nc;
+  document.getElementById('r-verd').textContent='"'+d.verdict+'"';
+  document.getElementById('r-tags').innerHTML=(d.tags||[]).map(t=>`<span class="rtag">${t}</span>`).join('');
+  const b=document.getElementById('res-bd');
+  const sc=Object.entries(d.scores||{}).map(([k,v])=>`<div class="sc-row"><div class="sc-l">${k}</div><div class="sc-track"><div class="sc-fill" data-w="${v*10}" style="width:0%"></div></div><div class="sc-v">${v}</div></div>`).join('');
+  const fo=(d.points_forts||[]).map(p=>`<div class="fbi"><span class="fbi-ic" style="color:#22c55e">✓</span>${p}</div>`).join('');
+  const am=(d.a_ameliorer||[]).map(p=>`<div class="fbi"><span class="fbi-ic" style="color:#f59e0b">→</span>${p}</div>`).join('');
+  const re=(d.regles_mode||[]).map(r=>`<div class="fbi"><span class="fbi-ic">📐</span>${r}</div>`).join('');
+  const pi=(d.pieces_manquantes||[]).map((p,i)=>`<div class="piece-card"><div class="piece-n">PIÈCE ${i+1}</div><div class="piece-name">${p.piece||''}</div><div class="piece-why">${p.pourquoi||''}</div><div class="piece-shop">🛍 ${p.shopping||''}</div></div>`).join('');
+  b.innerHTML=
+    `<div><div class="rsec">SCORES DÉTAILLÉS</div><div class="sc-grid">${sc}</div></div>`+
+    `<div class="divider"></div>`+
+    (d.reponse_question?`<div><div class="rsec">RÉPONSE À TA QUESTION</div><div class="q-box"><div class="q-lbl">💬 ${S.question}</div><div class="q-txt">${d.reponse_question}</div></div></div>`:'')+
+    `<div><div class="rsec">CE QUI MARCHE ✓</div><div class="fbl">${fo}</div></div>`+
+    `<div><div class="rsec">À AMÉLIORER →</div><div class="fbl">${am}</div></div>`+
+    `<div class="conseil"><div class="conseil-lbl">✦ Conseil Drip'In</div><div class="conseil-txt">${d.conseil_stylist||''}</div></div>`+
+    (re?`<div><div class="rsec">RÈGLES DE MODE</div><div class="fbl">${re}</div></div>`:'')+
+    `<div><div class="rsec">PIÈCES MANQUANTES</div><div style="display:flex;flex-direction:column;gap:.55rem">${pi}</div></div>`+
+    `<div><div class="rsec">COUP DE CŒUR ❤</div><div class="lb-box">${d.coup_de_coeur||''}</div></div>`+
+    `<div><div class="rsec">TENDANCE SAISON</div><div class="lb-box">${d.tendance_saison||''}</div></div>`+
+    `<div style="padding-bottom:2rem"><button class="btn" onclick="resetUp()">NOUVELLE ANALYSE →</button></div>`;
+  setTimeout(()=>{b.querySelectorAll('.sc-fill').forEach(el=>{el.style.transition='width 1s ease';el.style.width=el.dataset.w+'%'})},200);
+}
+
+function resetUp(){
+  S.imgs=[];
+  document.getElementById('pvws').innerHTML='';
+  document.getElementById('pvws').style.display='none';
+  document.getElementById('dz').style.display='flex';
+  document.getElementById('add-more').style.display='none';
+  document.getElementById('btn-analyze').disabled=true;
+  document.getElementById('fi').value='';
+  go('pg-up');
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
+  document.getElementById('nb-up').classList.add('on');
+}
+
+buildGal('all');
+</script>
+</body>
+</html>

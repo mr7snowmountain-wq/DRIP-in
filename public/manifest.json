@@ -1,0 +1,10 @@
+{
+  "name": "Drip'In",
+  "short_name": "Drip'In",
+  "description": "L'IA qui voit ce que tu portes.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f2f2f2",
+  "theme_color": "#000000",
+  "icons": []
+}
