@@ -21,79 +21,43 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
   .frame{width:100vw;height:100vh;height:100dvh;border-radius:0;border:none;box-shadow:none}
   .notch{display:none}
 }
-
 .login-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden}
-
-/* ══ IMAGE HERO ══ */
 .login-hero{position:relative;height:320px;flex-shrink:0;overflow:hidden}
 .login-hero img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
-.login-hero-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to bottom, rgba(0,0,0,0) 20%, rgba(0,0,0,0.55) 65%, rgba(0,0,0,0.85) 100%);
-}
+.login-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0) 20%,rgba(0,0,0,0.55) 65%,rgba(0,0,0,0.85) 100%)}
 .login-brand{position:absolute;bottom:3.5rem;left:1.5rem;right:1.5rem}
 .login-eyebrow{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:.25rem;font-weight:600}
 .login-logo{font-family:'Bebas Neue';font-size:46px;color:var(--white);letter-spacing:1px;line-height:1}
 .login-logo span{color:var(--accent)}
 .login-tagline{font-size:11px;color:rgba(255,255,255,.65);font-style:italic;margin-top:.2rem}
-
-/* ══ FORM CARD ══ */
-.login-card{
-  flex:1;
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
-  background:var(--white);
-  border-radius:28px 28px 0 0;
-  margin-top:-28px;
-  padding:1.6rem 1.5rem 2rem;
-  position:relative;
-  z-index:2;
-  box-shadow:0 -4px 24px rgba(0,0,0,.08);
-}
+.login-card{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--white);border-radius:28px 28px 0 0;margin-top:-28px;padding:1.6rem 1.5rem 2rem;position:relative;z-index:2;box-shadow:0 -4px 24px rgba(0,0,0,.08)}
 .login-card::-webkit-scrollbar{width:0}
-
-/* Handle bar */
 .card-handle{width:36px;height:4px;background:#e0e0e0;border-radius:2px;margin:0 auto 1.4rem}
-
-/* Tabs */
 .auth-tabs{display:flex;gap:4px;background:#f5f5f5;border-radius:50px;padding:4px;margin-bottom:1.25rem}
 .auth-tab{flex:1;padding:.55rem;border-radius:50px;font-family:'Bebas Neue';font-size:16px;letter-spacing:.8px;border:none;background:transparent;color:var(--gray);cursor:pointer;transition:.2s}
 .auth-tab.on{background:var(--black);color:var(--white)}
-
-/* Fields */
 .field{margin-bottom:.85rem}
 .field label{display:block;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--gray);margin-bottom:.4rem}
 .field input{width:100%;padding:.78rem 1rem;border:1.5px solid #e5e5e5;border-radius:12px;font-size:13px;font-family:'Inter',sans-serif;color:var(--black);background:var(--white);outline:none;transition:.15s;-webkit-appearance:none}
 .field input:focus{border-color:var(--black)}
 .field input::placeholder{color:#bbb}
-
 .forgot{text-align:right;margin-top:-.5rem;margin-bottom:.85rem}
 .forgot a{font-size:11px;color:var(--accent);text-decoration:none;font-weight:500}
-
-/* Buttons */
 .btn-login{width:100%;background:var(--black);color:var(--white);border:none;border-radius:50px;padding:.88rem;font-family:'Bebas Neue';font-size:21px;letter-spacing:1px;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.75rem}
 .btn-login:hover{background:#222}
 .btn-login:active{transform:scale(.98)}
 .btn-login:disabled{opacity:.35;cursor:not-allowed}
 .btn-arr{opacity:.4;font-size:15px;letter-spacing:-2px}
-
 .btn-mail{width:100%;background:#f5f5f5;color:var(--black);border:none;border-radius:50px;padding:.82rem;font-family:'Bebas Neue';font-size:18px;letter-spacing:1px;cursor:pointer;transition:.15s;display:none;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.75rem}
 .btn-mail:hover{background:#eee}
 .btn-mail.show{display:flex}
-
-/* Messages */
 .auth-msg{border-radius:10px;padding:.7rem 1rem;font-size:12px;line-height:1.5;text-align:center;display:none;margin-bottom:.75rem}
 .auth-msg.err{background:#fff0f0;border:1px solid #fcc;color:#c00;display:block}
 .auth-msg.ok{background:#f0fff4;border:1px solid #86efac;color:#166534;display:block}
-
 .login-note{text-align:center;font-size:10.5px;color:var(--gray);line-height:1.6;margin-top:.25rem}
 .login-note span{color:var(--accent);font-weight:600}
-
-/* Spinner */
 @keyframes spin{to{transform:rotate(360deg)}}
 .spinner{display:none;width:18px;height:18px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
-
-/* Reset view */
 .reset-view{display:none}
 .back-btn{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--gray);cursor:pointer;margin-bottom:1.1rem;font-weight:500}
 .back-btn:hover{color:var(--black)}
@@ -103,8 +67,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
 <div class="frame">
   <div class="notch"></div>
   <div class="login-wrap">
-
-    <!-- Image hero plein format -->
     <div class="login-hero">
       <img src="/images/oldmoney_5.webp" alt="Drip'In" loading="eager">
       <div class="login-hero-overlay"></div>
@@ -114,20 +76,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
         <div class="login-tagline">"L'IA qui voit ce que tu portes."</div>
       </div>
     </div>
-
-    <!-- Carte formulaire avec coins arrondis -->
     <div class="login-card">
       <div class="card-handle"></div>
-
-      <!-- Vue principale -->
       <div id="main-view">
         <div class="auth-tabs">
           <button class="auth-tab on" id="tab-login" onclick="switchTab('login')">CONNEXION</button>
           <button class="auth-tab" id="tab-signup" onclick="switchTab('signup')">INSCRIPTION</button>
         </div>
-
         <div id="auth-msg" class="auth-msg"></div>
-
         <div class="field">
           <label>Email</label>
           <input type="email" id="email" placeholder="ton@email.com" autocomplete="email">
@@ -136,30 +92,23 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
           <label>Mot de passe</label>
           <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
         </div>
-
         <div class="forgot" id="forgot-wrap">
-          <a href="#" onclick="showReset(event)">Mot de passe oublié ?</a>
+          <a href="#" onclick="showReset(event)">Mot de passe oubli&eacute; ?</a>
         </div>
-
         <button class="btn-login" id="btn-auth" onclick="handleAuth()">
           <span id="btn-label">SE CONNECTER</span>
-          <span class="btn-arr" id="btn-arr">› › ›</span>
+          <span class="btn-arr" id="btn-arr">&rsaquo; &rsaquo; &rsaquo;</span>
           <span class="spinner" id="btn-spinner"></span>
         </button>
-
-        <!-- Bouton ouvrir boîte mail (apparaît après inscription) -->
         <button class="btn-mail" id="btn-mail" onclick="openMailApp()">
-          ✉️ OUVRIR MA BOÎTE MAIL
+          &#x2709;&#xFE0F; OUVRIR MA BO&Icirc;TE MAIL
         </button>
-
         <div class="login-note">
-          100% privé · <span>tes photos ne sont pas stockées</span>
+          100% priv&eacute; &middot; <span>tes photos ne sont pas stock&eacute;es</span>
         </div>
       </div>
-
-      <!-- Vue reset password -->
       <div id="reset-view" class="reset-view">
-        <div class="back-btn" onclick="hideReset()">‹ Retour</div>
+        <div class="back-btn" onclick="hideReset()">&lsaquo; Retour</div>
         <div class="field">
           <label>Ton adresse email</label>
           <input type="email" id="reset-email" placeholder="ton@email.com">
@@ -167,13 +116,12 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
         <div id="reset-msg" class="auth-msg"></div>
         <button class="btn-login" onclick="handleReset()">
           <span>ENVOYER LE LIEN</span>
-          <span class="btn-arr">› › ›</span>
+          <span class="btn-arr">&rsaquo; &rsaquo; &rsaquo;</span>
         </button>
         <button class="btn-mail" id="btn-mail-reset" onclick="openMailApp()">
-          ✉️ OUVRIR MA BOÎTE MAIL
+          &#x2709;&#xFE0F; OUVRIR MA BO&Icirc;TE MAIL
         </button>
       </div>
-
     </div>
   </div>
 </div>
@@ -189,7 +137,6 @@ const sb = createClient(
 let mode = 'login'
 let userEmail = ''
 
-// Si déjà connecté → on va directement dans l'app
 sb.auth.getSession().then(({ data: { session } }) => {
   if (session) window.location.href = '/index.html'
 })
@@ -204,7 +151,8 @@ function switchTab(m) {
   hideMsg()
 }
 
-function showMsg(text, type = 'err') {
+function showMsg(text, type) {
+  if (!type) type = 'err'
   const el = document.getElementById('auth-msg')
   el.textContent = text
   el.className = 'auth-msg ' + type
@@ -220,7 +168,6 @@ function setLoading(on) {
   document.getElementById('btn-spinner').style.display = on ? 'inline-block' : 'none'
 }
 
-// Ouvre l'app mail selon le domaine de l'email
 function openMailApp() {
   const email = userEmail || document.getElementById('email').value || document.getElementById('reset-email').value
   const domain = email.split('@')[1] || ''
@@ -233,7 +180,7 @@ function openMailApp() {
     'yahoo.com': 'https://mail.yahoo.com',
     'yahoo.fr': 'https://mail.yahoo.com',
     'icloud.com': 'https://www.icloud.com/mail',
-    'me.com': 'https://www.icloud.com/mail',
+    'me.com': 'https://www.icloud.com/mail'
   }
   const url = mailApps[domain] || 'https://mail.google.com'
   window.open(url, '_blank')
@@ -243,7 +190,7 @@ async function handleAuth() {
   const email = document.getElementById('email').value.trim()
   const password = document.getElementById('password').value
   if (!email || !password) { showMsg('Remplis tous les champs.'); return }
-  if (password.length < 6) { showMsg('Mot de passe trop court (6 caractères min).'); return }
+  if (password.length < 6) { showMsg('Mot de passe trop court (6 caracteres min).'); return }
   setLoading(true); hideMsg()
   userEmail = email
 
@@ -255,7 +202,7 @@ async function handleAuth() {
     const { error } = await sb.auth.signUp({ email, password })
     if (error) { showMsg(friendlyError(error.message)); setLoading(false) }
     else {
-      showMsg('✉️ Un email de confirmation t\'a été envoyé !', 'ok')
+      showMsg('Un email de confirmation a ete envoye !', 'ok')
       setLoading(false)
       document.getElementById('btn-mail').classList.add('show')
     }
@@ -264,7 +211,7 @@ async function handleAuth() {
 
 function friendlyError(msg) {
   if (msg.includes('Invalid login')) return 'Email ou mot de passe incorrect.'
-  if (msg.includes('already registered')) return 'Cet email est déjà utilisé. Connecte-toi !'
+  if (msg.includes('already registered')) return 'Cet email est deja utilise. Connecte-toi !'
   if (msg.includes('rate limit')) return 'Trop de tentatives. Attends un peu.'
   return msg
 }
@@ -278,25 +225,26 @@ function hideReset() {
   document.getElementById('reset-view').style.display = 'none'
   document.getElementById('main-view').style.display = 'block'
 }
+
 async function handleReset() {
   const email = document.getElementById('reset-email').value.trim()
   if (!email) return
   userEmail = email
   const { error } = await sb.auth.resetPasswordForEmail(email, {
-    redirectTo: window.location.origin + '/index.html'
+    redirectTo: 'https://dripin-ai.com/reset-password.html'
   })
   const el = document.getElementById('reset-msg')
   if (error) {
     el.textContent = error.message
     el.className = 'auth-msg err'
   } else {
-    el.textContent = '✉️ Lien envoyé ! Vérifie ta boîte mail.'
+    el.textContent = 'Lien envoye ! Verifie ta boite mail.'
     el.className = 'auth-msg ok'
     document.getElementById('btn-mail-reset').classList.add('show')
   }
 }
 
-document.addEventListener('keydown', e => { if (e.key === 'Enter') handleAuth() })
+document.addEventListener('keydown', function(e) { if (e.key === 'Enter') handleAuth() })
 </script>
 </body>
 </html>
