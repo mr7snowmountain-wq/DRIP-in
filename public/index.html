@@ -624,5 +624,15 @@ function resetUp(){
 
 buildGal('all');
 </script>
-</body>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const { createClient } = supabase
+const sb = createClient(
+  'https://cnrluaseqvkjumbfwhdp.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNucmx1YXNlcXZranVtYmZ3aGRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzNzgzMjIsImV4cCI6MjA5MDk1NDMyMn0.zd_TBAnsvUfGritEEoNkYVLc-9How0D6lyxvKe8Iht8'
+)
+sb.auth.getSession().then(({ data: { session } }) => {
+  if (!session) window.location.href = '/login.html'
+})
+</script></body>
 </html>
