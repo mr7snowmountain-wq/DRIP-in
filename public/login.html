@@ -8,6 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="Drip'In">
 <meta name="theme-color" content="#000000">
 <title>Drip'In — Connexion</title>
+<link rel="stylesheet" href="/desktop.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -64,6 +65,24 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
 </style>
 </head>
 <body>
+
+<!-- PANNEAU GAUCHE DESKTOP (invisible sur mobile) -->
+<div class="desktop-panel">
+  <img class="desktop-panel-img" src="/images/oldmoney_5.webp" alt="">
+  <div class="desktop-panel-overlay"></div>
+  <div class="desktop-panel-content">
+    <div class="desktop-panel-eyebrow">AI Style Coach · Mode Expert</div>
+    <div class="desktop-panel-logo">DRIP<span>'</span>IN</div>
+    <div class="desktop-panel-tagline">"L'IA qui voit ce que tu portes."</div>
+    <div class="desktop-panel-features">
+      <div class="desktop-panel-feature"><span class="desktop-panel-feature-ic">✦</span>Analyse complète de ton outfit</div>
+      <div class="desktop-panel-feature"><span class="desktop-panel-feature-ic">✦</span>Conseils de styliste pro</div>
+      <div class="desktop-panel-feature"><span class="desktop-panel-feature-ic">✦</span>Pièces manquantes &amp; shopping</div>
+      <div class="desktop-panel-feature"><span class="desktop-panel-feature-ic">✦</span>100% privé · photos non stockées</div>
+    </div>
+  </div>
+</div>
+
 <div class="frame">
   <div class="notch"></div>
   <div class="login-wrap">
@@ -133,14 +152,11 @@ const sb = createClient(
   'https://cnrluaseqvkjumbfwhdp.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNucmx1YXNlcXZranVtYmZ3aGRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzNzgzMjIsImV4cCI6MjA5MDk1NDMyMn0.zd_TBAnsvUfGritEEoNkYVLc-9How0D6lyxvKe8Iht8'
 )
-
 let mode = 'login'
 let userEmail = ''
-
 sb.auth.getSession().then(({ data: { session } }) => {
   if (session) window.location.href = '/index.html'
 })
-
 function switchTab(m) {
   mode = m
   document.getElementById('tab-login').classList.toggle('on', m === 'login')
@@ -150,42 +166,25 @@ function switchTab(m) {
   document.getElementById('btn-mail').classList.remove('show')
   hideMsg()
 }
-
 function showMsg(text, type) {
   if (!type) type = 'err'
   const el = document.getElementById('auth-msg')
   el.textContent = text
   el.className = 'auth-msg ' + type
 }
-function hideMsg() {
-  document.getElementById('auth-msg').className = 'auth-msg'
-}
-
+function hideMsg() { document.getElementById('auth-msg').className = 'auth-msg' }
 function setLoading(on) {
   document.getElementById('btn-auth').disabled = on
   document.getElementById('btn-label').style.display = on ? 'none' : 'inline'
   document.getElementById('btn-arr').style.display = on ? 'none' : 'inline'
   document.getElementById('btn-spinner').style.display = on ? 'inline-block' : 'none'
 }
-
 function openMailApp() {
   const email = userEmail || document.getElementById('email').value || document.getElementById('reset-email').value
   const domain = email.split('@')[1] || ''
-  const mailApps = {
-    'gmail.com': 'https://mail.google.com',
-    'googlemail.com': 'https://mail.google.com',
-    'outlook.com': 'https://outlook.live.com',
-    'hotmail.com': 'https://outlook.live.com',
-    'live.com': 'https://outlook.live.com',
-    'yahoo.com': 'https://mail.yahoo.com',
-    'yahoo.fr': 'https://mail.yahoo.com',
-    'icloud.com': 'https://www.icloud.com/mail',
-    'me.com': 'https://www.icloud.com/mail'
-  }
-  const url = mailApps[domain] || 'https://mail.google.com'
-  window.open(url, '_blank')
+  const mailApps = {'gmail.com':'https://mail.google.com','googlemail.com':'https://mail.google.com','outlook.com':'https://outlook.live.com','hotmail.com':'https://outlook.live.com','live.com':'https://outlook.live.com','yahoo.com':'https://mail.yahoo.com','yahoo.fr':'https://mail.yahoo.com','icloud.com':'https://www.icloud.com/mail','me.com':'https://www.icloud.com/mail'}
+  window.open(mailApps[domain] || 'https://mail.google.com', '_blank')
 }
-
 async function handleAuth() {
   const email = document.getElementById('email').value.trim()
   const password = document.getElementById('password').value
@@ -193,7 +192,6 @@ async function handleAuth() {
   if (password.length < 6) { showMsg('Mot de passe trop court (6 caracteres min).'); return }
   setLoading(true); hideMsg()
   userEmail = email
-
   if (mode === 'login') {
     const { error } = await sb.auth.signInWithPassword({ email, password })
     if (error) { showMsg(friendlyError(error.message)); setLoading(false) }
@@ -201,49 +199,26 @@ async function handleAuth() {
   } else {
     const { error } = await sb.auth.signUp({ email, password })
     if (error) { showMsg(friendlyError(error.message)); setLoading(false) }
-    else {
-      showMsg('Un email de confirmation a ete envoye !', 'ok')
-      setLoading(false)
-      document.getElementById('btn-mail').classList.add('show')
-    }
+    else { showMsg('Un email de confirmation a ete envoye !', 'ok'); setLoading(false); document.getElementById('btn-mail').classList.add('show') }
   }
 }
-
 function friendlyError(msg) {
   if (msg.includes('Invalid login')) return 'Email ou mot de passe incorrect.'
   if (msg.includes('already registered')) return 'Cet email est deja utilise. Connecte-toi !'
   if (msg.includes('rate limit')) return 'Trop de tentatives. Attends un peu.'
   return msg
 }
-
-function showReset(e) {
-  e.preventDefault()
-  document.getElementById('main-view').style.display = 'none'
-  document.getElementById('reset-view').style.display = 'block'
-}
-function hideReset() {
-  document.getElementById('reset-view').style.display = 'none'
-  document.getElementById('main-view').style.display = 'block'
-}
-
+function showReset(e) { e.preventDefault(); document.getElementById('main-view').style.display = 'none'; document.getElementById('reset-view').style.display = 'block' }
+function hideReset() { document.getElementById('reset-view').style.display = 'none'; document.getElementById('main-view').style.display = 'block' }
 async function handleReset() {
   const email = document.getElementById('reset-email').value.trim()
   if (!email) return
   userEmail = email
-  const { error } = await sb.auth.resetPasswordForEmail(email, {
-    redirectTo: 'https://dripin-ai.com/reset-password.html'
-  })
+  const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: 'https://dripin-ai.com/reset-password.html' })
   const el = document.getElementById('reset-msg')
-  if (error) {
-    el.textContent = error.message
-    el.className = 'auth-msg err'
-  } else {
-    el.textContent = 'Lien envoye ! Verifie ta boite mail.'
-    el.className = 'auth-msg ok'
-    document.getElementById('btn-mail-reset').classList.add('show')
-  }
+  if (error) { el.textContent = error.message; el.className = 'auth-msg err' }
+  else { el.textContent = 'Lien envoye ! Verifie ta boite mail.'; el.className = 'auth-msg ok'; document.getElementById('btn-mail-reset').classList.add('show') }
 }
-
 document.addEventListener('keydown', function(e) { if (e.key === 'Enter') handleAuth() })
 </script>
 </body>
