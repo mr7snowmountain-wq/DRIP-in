@@ -15,6 +15,7 @@
 <link rel="preload" as="image" href="/images/street_6.webp">
 <link rel="preload" as="image" href="/images/oldmoney_5.webp">
 <link rel="preload" as="image" href="/images/paris_3.webp">
+<link rel="stylesheet" href="/desktop.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -34,15 +35,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
 @keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 .scr{overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
 .scr::-webkit-scrollbar{width:0}
-
-/* NAV */
 .nav{display:flex;justify-content:space-around;padding:.55rem .5rem .75rem;background:var(--white);border-top:.5px solid var(--lg);flex-shrink:0}
 .ni{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;opacity:.25;border:none;background:none;transition:.2s;padding:.25rem .75rem;border-radius:12px}
 .ni.on{opacity:1}
 .ni .ic{font-size:19px}
 .ni .lb{font-size:8px;font-weight:700;letter-spacing:.8px;color:var(--black);font-family:'Bebas Neue'}
-
-/* ══ ONBOARDING ══ */
 .ob{flex:1;background:var(--white);display:flex;flex-direction:column;overflow:hidden}
 .ob-mosaic{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:5px;padding:5px;flex:1;min-height:0}
 .ob-cell{border-radius:16px;overflow:hidden;background:#f0ede8}
@@ -56,8 +53,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
 .ob-btn{background:var(--black);color:var(--white);border:none;border-radius:50px;padding:.88rem 1.75rem;font-family:'Bebas Neue';font-size:21px;letter-spacing:1px;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:space-between;transition:.15s}
 .ob-btn:hover{background:#222}
 .ob-arr{opacity:.4;font-size:15px;letter-spacing:-2px}
-
-/* ══ STEP HEADER ══ */
 .shdr{padding:.85rem 1.5rem .55rem;border-bottom:.5px solid var(--lg);flex-shrink:0;background:var(--white)}
 .srow{display:flex;align-items:center;justify-content:space-between;margin-bottom:.2rem}
 .stitle{font-family:'Bebas Neue';font-size:25px;letter-spacing:.5px}
@@ -66,8 +61,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
 .prog{display:flex;gap:4px}
 .pb{height:3px;flex:1;border-radius:2px;background:#e8e8e8;transition:.4s}
 .pb.done{background:var(--black)}
-
-/* ══ GALLERY ══ */
 .tabs{display:flex;gap:.3rem;padding:.6rem 1.5rem;overflow-x:auto;flex-shrink:0;background:var(--white)}
 .tabs::-webkit-scrollbar{width:0;height:0}
 .tb{padding:5px 13px;border-radius:50px;font-size:10.5px;font-weight:600;border:1px solid #e5e5e5;color:var(--gray);cursor:pointer;white-space:nowrap;flex-shrink:0;background:var(--white);transition:.12s}
@@ -89,8 +82,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
 .ph-name{font-family:'Bebas Neue';font-size:15px;color:#fff;letter-spacing:.5px}
 .ph-sub{font-size:9px;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.5px;font-weight:500}
 .ph-soon{position:absolute;bottom:8px;right:8px;background:rgba(255,255,255,.85);border-radius:50px;font-size:8.5px;font-weight:700;padding:3px 9px;color:#333}
-
-/* ══ CRITERIA ══ */
 .crit-bd{padding:.9rem 1.5rem;display:flex;flex-direction:column;gap:1.1rem}
 .cl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray);margin-bottom:.45rem}
 .chips{display:flex;flex-wrap:wrap;gap:5px}
@@ -101,8 +92,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
 .rng-wrap .rl{font-size:11px;color:var(--gray);display:flex;justify-content:space-between}
 .rng-wrap .rl b{color:var(--black);font-weight:700;font-size:13px}
 input[type=range]{width:100%;accent-color:var(--black)}
-
-/* ══ UPLOAD ══ */
 .up-bd{padding:.9rem 1.5rem;display:flex;flex-direction:column;gap:.8rem}
 .pp-pill{display:flex;align-items:center;gap:.65rem;background:#f8f8f8;border-radius:12px;padding:.75rem 1rem}
 .pp-av{width:34px;height:34px;border-radius:50%;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue';font-size:15px;flex-shrink:0}
@@ -125,15 +114,11 @@ input[type=range]{width:100%;accent-color:var(--black)}
 .add-more{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.65rem;border:1.5px dashed #e0e0e0;border-radius:12px;cursor:pointer;font-size:12px;font-weight:600;color:var(--gray);background:#fafafa;transition:.12s}
 .add-more:hover{border-color:var(--black);color:var(--black)}
 input[type=file]{display:none}
-
-/* ══ FOOTER ══ */
 .foot{padding:.8rem 1.5rem;border-top:.5px solid var(--lg);flex-shrink:0;background:var(--white)}
 .btn{width:100%;background:var(--black);color:var(--white);border:none;border-radius:50px;padding:.82rem;font-family:'Bebas Neue';font-size:20px;letter-spacing:1px;cursor:pointer;transition:.15s}
 .btn:hover{background:#222}
 .btn:disabled{opacity:.3;cursor:not-allowed}
 .btn:active{transform:scale(.98)}
-
-/* ══ LOADING ══ */
 .ld{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:2rem;text-align:center}
 .ld-logo{font-family:'Bebas Neue';font-size:28px;letter-spacing:1px;color:var(--black);margin-bottom:.25rem}
 .ld-logo span{color:var(--accent)}
@@ -148,8 +133,6 @@ input[type=file]{display:none}
 .dot:nth-child(2){animation-delay:.15s}
 .dot:nth-child(3){animation-delay:.3s}
 @keyframes bop{0%,80%,100%{opacity:.15;transform:scale(.75)}40%{opacity:1;transform:scale(1)}}
-
-/* ══ RESULTS ══ */
 .res-hdr{background:var(--dark);padding:1.2rem 1.5rem;flex-shrink:0}
 .res-bk{font-size:11px;color:rgba(255,255,255,.4);cursor:pointer;margin-bottom:.35rem;display:flex;align-items:center;gap:4px}
 .res-top{display:flex;align-items:flex-end;justify-content:space-between}
@@ -189,11 +172,28 @@ input[type=file]{display:none}
 </style>
 </head>
 <body>
+
+<!-- PANNEAU GAUCHE DESKTOP (invisible sur mobile) -->
+<div class="desktop-panel">
+  <img class="desktop-panel-img" src="/images/oldmoney_1.webp" alt="">
+  <div class="desktop-panel-overlay"></div>
+  <div class="desktop-panel-content">
+    <div class="desktop-panel-eyebrow">AI Style Coach · Mode Expert</div>
+    <div class="desktop-panel-logo">DRIP<span>'</span>IN</div>
+    <div class="desktop-panel-tagline">"L'IA qui voit ce que tu portes."</div>
+    <div class="desktop-panel-features">
+      <div class="desktop-panel-feature"><span class="desktop-panel-feature-ic">✦</span>Analyse complète de ton outfit</div>
+      <div class="desktop-panel-feature"><span class="desktop-panel-feature-ic">✦</span>Conseils de styliste pro</div>
+      <div class="desktop-panel-feature"><span class="desktop-panel-feature-ic">✦</span>Pièces manquantes &amp; shopping</div>
+      <div class="desktop-panel-feature"><span class="desktop-panel-feature-ic">✦</span>100% privé · photos non stockées</div>
+    </div>
+  </div>
+</div>
+
 <div class="frame">
   <div class="notch"></div>
   <div class="screen">
 
-    <!-- ══ ONBOARDING ══ -->
     <div class="page on" id="pg-ob">
       <div class="ob">
         <div class="ob-mosaic">
@@ -214,7 +214,6 @@ input[type=file]{display:none}
       </div>
     </div>
 
-    <!-- ══ GALERIE ══ -->
     <div class="page" id="pg-gal">
       <div class="shdr">
         <div class="srow"><div class="stitle">EXPLORE LES STYLES</div><div class="snum">1 / 3</div></div>
@@ -239,7 +238,6 @@ input[type=file]{display:none}
       <div class="foot"><button class="btn" id="btn-gal" disabled onclick="go('pg-crit')">SUIVANT →</button></div>
     </div>
 
-    <!-- ══ CRITÈRES ══ -->
     <div class="page" id="pg-crit">
       <div class="shdr">
         <div class="srow"><div class="stitle">TON PROFIL</div><div class="snum">2 / 3</div></div>
@@ -309,7 +307,6 @@ input[type=file]{display:none}
       <div class="foot"><button class="btn" onclick="go('pg-up')">ENVOYER MES PHOTOS →</button></div>
     </div>
 
-    <!-- ══ UPLOAD ══ -->
     <div class="page" id="pg-up">
       <div class="shdr">
         <div class="srow"><div class="stitle">TES PHOTOS</div><div class="snum">3 / 3</div></div>
@@ -340,7 +337,6 @@ input[type=file]{display:none}
       <div class="foot"><button class="btn" id="btn-analyze" disabled onclick="startAnalysis()">ANALYSER MON STYLE →</button></div>
     </div>
 
-    <!-- ══ LOADING ══ -->
     <div class="page" id="pg-load">
       <div class="ld">
         <div class="ld-logo">DRIP<span>'</span>IN</div>
@@ -352,7 +348,6 @@ input[type=file]{display:none}
       </div>
     </div>
 
-    <!-- ══ RÉSULTATS ══ -->
     <div class="page" id="pg-res">
       <div class="res-hdr">
         <div class="res-bk" onclick="resetUp()">‹ Nouvelle analyse</div>
@@ -382,246 +377,30 @@ input[type=file]{display:none}
 </div>
 
 <script>
-const GAL = [
-  {id:'m1',name:'Minimal Chic',sub:'Neutral · Oversized',cat:'minimal',big:true,img:'/images/minimal_1.webp'},
-  {id:'m2',name:'Quiet Luxury',sub:'Tones doux',cat:'minimal',big:false,img:'/images/minimal_2.webp'},
-  {id:'m3',name:'Clean Lines',sub:'Beige · Blanc',cat:'minimal',big:false,img:'/images/minimal_3.webp'},
-  {id:'m4',name:'Power Blazer',sub:'Camel · Black',cat:'minimal',big:false,img:'/images/minimal_4.webp'},
-  {id:'m5',name:'Soft Neutral',sub:'Tone sur tone',cat:'minimal',big:true,img:'/images/minimal_5.webp'},
-  {id:'sw1',name:'Street NYC',sub:'Urban · Racing',cat:'street',big:false,img:'/images/street_1.webp'},
-  {id:'sw2',name:'Hoodie Cargo',sub:'Oversized · Relaxed',cat:'street',big:true,img:'/images/street_2.webp'},
-  {id:'sw3',name:'Color Block',sub:'Bold · Street',cat:'street',big:false,img:'/images/street_3.webp'},
-  {id:'sw4',name:'Crop Cargo',sub:'Urban · Chic',cat:'street',big:false,img:'/images/street_4.webp'},
-  {id:'sw5',name:'Monochrome',sub:'All Green',cat:'street',big:false,img:'/images/street_5.webp'},
-  {id:'sw6',name:'Puffer Cream',sub:'Cozy · Street',cat:'street',big:true,img:'/images/street_6.webp'},
-  {id:'sw7',name:'Military Drip',sub:'Camo · Boots',cat:'street',big:false,img:'/images/street_7.webp'},
-  {id:'sw8',name:'Layered Look',sub:'Urban · Cool',cat:'street',big:false,img:'/images/street_8.webp'},
-  {id:'om1',name:'Camel Coat',sub:'Chelsea · Gold',cat:'money',big:true,img:'/images/oldmoney_1.webp'},
-  {id:'om2',name:'All Green',sub:'Monochrome luxe',cat:'money',big:false,img:'/images/oldmoney_2.webp'},
-  {id:'om3',name:'Dark Wool',sub:'Turtleneck · Bag',cat:'money',big:false,img:'/images/oldmoney_3.webp'},
-  {id:'om4',name:'Brown Suit',sub:'Tailored · Crisp',cat:'money',big:false,img:'/images/oldmoney_4.webp'},
-  {id:'om5',name:'Camel Long',sub:'Tone sur tone',cat:'money',big:true,img:'/images/oldmoney_5.webp'},
-  {id:'pa1',name:'Paris Brun',sub:'Beret · YSL',cat:'paris',big:true,img:'/images/paris_1.webp'},
-  {id:'pa2',name:'Cafe Paris',sub:'Beret · Trench',cat:'paris',big:false,img:'/images/paris_2.webp'},
-  {id:'pa3',name:'Tour Eiffel',sub:'Camel · Bottes',cat:'paris',big:false,img:'/images/paris_3.webp'},
-  {id:'pa4',name:'Seine Style',sub:'Noir · Beret rouge',cat:'paris',big:true,img:'/images/paris_4.webp'},
-];
-
-const PH = {
-  boho:{bg:'#c4a882',ic:'🌿',name:'Boho',sub:'Terre · Ocre · Fluide'},
-  y2k:{bg:'#c4507a',ic:'💿',name:'Y2K',sub:'Rose fluo · Taille basse'},
-  dark:{bg:'#2a2318',ic:'📚',name:'Dark Academia',sub:'Marron · Layering'},
-  sport:{bg:'#3a5cc4',ic:'⚡',name:'Sporty Chic',sub:'Bleu · Tracksuit'},
-  vintage:{bg:'#c4703a',ic:'🎞️',name:'Vintage',sub:'Rouille · Cognac'},
-  cottage:{bg:'#6a9e5a',ic:'🌸',name:'Cottagecore',sub:'Vert sauge · Lin'},
-  biz:{bg:'#2c4a7c',ic:'💼',name:'Business',sub:'Navy · Tailored'},
-};
-
-const CAT = {minimal:'MINIMAL',street:'STREET',money:'OLD MONEY',paris:'PARIS'};
-const S = {styles:[],occasion:'Quotidien',morpho:'Sablier',palette:'Neutres / Beige',saison:'Automne',question:"J'hésite entre plusieurs pièces",audace:5,budget:'Mid-range',inspos:['A.P.C'],imgs:[]};
-const chosen = new Set();
-
-function go(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
-  document.getElementById(id).classList.add('on');
-  const showNav=['pg-up','pg-gal','pg-crit','pg-res'].includes(id);
-  document.getElementById('navbar').style.display=showNav?'flex':'none';
-  if(id==='pg-up') updatePill();
+const GAL=[{id:'m1',name:'Minimal Chic',sub:'Neutral · Oversized',cat:'minimal',big:true,img:'/images/minimal_1.webp'},{id:'m2',name:'Quiet Luxury',sub:'Tones doux',cat:'minimal',big:false,img:'/images/minimal_2.webp'},{id:'m3',name:'Clean Lines',sub:'Beige · Blanc',cat:'minimal',big:false,img:'/images/minimal_3.webp'},{id:'m4',name:'Power Blazer',sub:'Camel · Black',cat:'minimal',big:false,img:'/images/minimal_4.webp'},{id:'m5',name:'Soft Neutral',sub:'Tone sur tone',cat:'minimal',big:true,img:'/images/minimal_5.webp'},{id:'sw1',name:'Street NYC',sub:'Urban · Racing',cat:'street',big:false,img:'/images/street_1.webp'},{id:'sw2',name:'Hoodie Cargo',sub:'Oversized · Relaxed',cat:'street',big:true,img:'/images/street_2.webp'},{id:'sw3',name:'Color Block',sub:'Bold · Street',cat:'street',big:false,img:'/images/street_3.webp'},{id:'sw4',name:'Crop Cargo',sub:'Urban · Chic',cat:'street',big:false,img:'/images/street_4.webp'},{id:'sw5',name:'Monochrome',sub:'All Green',cat:'street',big:false,img:'/images/street_5.webp'},{id:'sw6',name:'Puffer Cream',sub:'Cozy · Street',cat:'street',big:true,img:'/images/street_6.webp'},{id:'sw7',name:'Military Drip',sub:'Camo · Boots',cat:'street',big:false,img:'/images/street_7.webp'},{id:'sw8',name:'Layered Look',sub:'Urban · Cool',cat:'street',big:false,img:'/images/street_8.webp'},{id:'om1',name:'Camel Coat',sub:'Chelsea · Gold',cat:'money',big:true,img:'/images/oldmoney_1.webp'},{id:'om2',name:'All Green',sub:'Monochrome luxe',cat:'money',big:false,img:'/images/oldmoney_2.webp'},{id:'om3',name:'Dark Wool',sub:'Turtleneck · Bag',cat:'money',big:false,img:'/images/oldmoney_3.webp'},{id:'om4',name:'Brown Suit',sub:'Tailored · Crisp',cat:'money',big:false,img:'/images/oldmoney_4.webp'},{id:'om5',name:'Camel Long',sub:'Tone sur tone',cat:'money',big:true,img:'/images/oldmoney_5.webp'},{id:'pa1',name:'Paris Brun',sub:'Beret · YSL',cat:'paris',big:true,img:'/images/paris_1.webp'},{id:'pa2',name:'Cafe Paris',sub:'Beret · Trench',cat:'paris',big:false,img:'/images/paris_2.webp'},{id:'pa3',name:'Tour Eiffel',sub:'Camel · Bottes',cat:'paris',big:false,img:'/images/paris_3.webp'},{id:'pa4',name:'Seine Style',sub:'Noir · Beret rouge',cat:'paris',big:true,img:'/images/paris_4.webp'}];
+const PH={boho:{bg:'#c4a882',ic:'🌿',name:'Boho',sub:'Terre · Ocre · Fluide'},y2k:{bg:'#c4507a',ic:'💿',name:'Y2K',sub:'Rose fluo · Taille basse'},dark:{bg:'#2a2318',ic:'📚',name:'Dark Academia',sub:'Marron · Layering'},sport:{bg:'#3a5cc4',ic:'⚡',name:'Sporty Chic',sub:'Bleu · Tracksuit'},vintage:{bg:'#c4703a',ic:'🎞️',name:'Vintage',sub:'Rouille · Cognac'},cottage:{bg:'#6a9e5a',ic:'🌸',name:'Cottagecore',sub:'Vert sauge · Lin'},biz:{bg:'#2c4a7c',ic:'💼',name:'Business',sub:'Navy · Tailored'}};
+const CAT={minimal:'MINIMAL',street:'STREET',money:'OLD MONEY',paris:'PARIS'};
+const S={styles:[],occasion:'Quotidien',morpho:'Sablier',palette:'Neutres / Beige',saison:'Automne',question:"J'hésite entre plusieurs pièces",audace:5,budget:'Mid-range',inspos:['A.P.C'],imgs:[]};
+const chosen=new Set();
+function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));document.getElementById(id).classList.add('on');const showNav=['pg-up','pg-gal','pg-crit','pg-res'].includes(id);document.getElementById('navbar').style.display=showNav?'flex':'none';if(id==='pg-up')updatePill();}
+function navTo(pg,nb){go(pg);document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));document.getElementById(nb).classList.add('on');}
+function buildGal(filter){const catLabel=CAT;let items=filter==='all'?[...GAL]:GAL.filter(s=>s.cat===filter);let html=items.map(s=>`<div class="gc${s.big?' big':''}${chosen.has(s.id)?' chosen':''}" data-id="${s.id}" onclick="toggleCard(this,'${s.id}')"><img src="${s.img}" alt="${s.name}" loading="lazy"><div class="cat-lbl">${catLabel[s.cat]||s.cat.toUpperCase()}</div><button class="gc-pick" onclick="event.stopPropagation();toggleCard(this.closest('.gc'),'${s.id}')">${chosen.has(s.id)?'✓':'+ Choisir'}</button><div class="gc-lbl"><div class="gc-name">${s.name}</div><div class="gc-sub">${s.sub}</div></div></div>`).join('');if(filter==='all'||Object.keys(PH).includes(filter)){const phCats=filter==='all'?Object.keys(PH):[filter];phCats.forEach(cat=>{const p=PH[cat];if(!p)return;html+=`<div class="ph-card" style="background:${p.bg}"><div class="ph-ic">${p.ic}</div><div class="ph-name">${p.name}</div><div class="ph-sub">${p.sub}</div><div class="ph-soon">Photos bientôt</div></div>`;});}document.getElementById('gg').innerHTML=html;}
+function toggleCard(el,id){if(chosen.has(id)){chosen.delete(id);el.classList.remove('chosen')}else{chosen.add(id);el.classList.add('chosen')}S.styles=[...chosen].map(cid=>GAL.find(g=>g.id===cid)?.name).filter(Boolean);document.getElementById('btn-gal').disabled=chosen.size===0;el.querySelector('.gc-pick').textContent=chosen.has(id)?'✓':'+ Choisir';}
+function ft(el,cat){document.querySelectorAll('#tabs .tb').forEach(t=>t.classList.remove('on'));el.classList.add('on');buildGal(cat);}
+function pick(el,gid){document.querySelectorAll('#'+gid+' .chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');const m={'c-occ':'occasion','c-mor':'morpho','c-pal':'palette','c-sai':'saison','c-q':'question','c-bud':'budget'};if(m[gid])S[m[gid]]=el.textContent.trim();}
+function tog(el){el.classList.toggle('on');S.inspos=[...document.querySelectorAll('#c-ins .chip.on')].map(c=>c.textContent.trim());}
+function updatePill(){const st=S.styles.length?S.styles.slice(0,2).join(' · '):'Mon style';document.getElementById('pp-b').textContent=st;document.getElementById('pp-s').textContent=S.morpho+' · '+S.palette+' · '+S.saison;document.getElementById('pp-av').textContent=S.styles.length?S.styles[0][0]:'D';}
+function compressImg(file,cb){const r=new FileReader();r.onload=ev=>{const img=new Image();img.onload=()=>{const canvas=document.createElement('canvas');let w=img.width,h=img.height,max=1024;if(w>max||h>max){if(w>h){h=Math.round(h*max/w);w=max;}else{w=Math.round(w*max/h);h=max;}}canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(img,0,0,w,h);const data=canvas.toDataURL('image/jpeg',0.75);cb({b64:data.split(',')[1],url:data});};img.src=ev.target.result;};r.readAsDataURL(file);}
+function handleFiles(e){const files=[...e.target.files].slice(0,3-S.imgs.length);if(!files.length)return;let loaded=0;files.forEach(file=>{compressImg(file,img=>{S.imgs.push(img);loaded++;if(loaded===files.length)renderPvws();});});}
+function renderPvws(){const labels=["Outfit principal","2ème pièce / hésitation","3ème pièce"];document.getElementById('pvws').innerHTML=S.imgs.map((img,i)=>`<div class="pvw"><img src="${img.url}" alt="photo ${i+1}"><div class="pvw-lbl">${labels[i]}</div><button class="pvw-rm" onclick="rmImg(${i})">✕</button></div>`).join('');document.getElementById('pvws').style.display='flex';document.getElementById('dz').style.display=S.imgs.length>=3?'none':'flex';document.getElementById('add-more').style.display=S.imgs.length>0&&S.imgs.length<3?'flex':'none';document.getElementById('btn-analyze').disabled=S.imgs.length===0;}
+function rmImg(i){S.imgs.splice(i,1);if(!S.imgs.length){document.getElementById('pvws').style.display='none';document.getElementById('dz').style.display='flex';document.getElementById('add-more').style.display='none';document.getElementById('btn-analyze').disabled=true;}else renderPvws();}
+const dz=document.getElementById('dz');dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag')});dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');handleFiles({target:{files:e.dataTransfer.files}})});
+const LD_STEPS=["Identification des pièces et matières…","Analyse des couleurs et proportions…","Évaluation par rapport à ton profil…","Génération des conseils Drip'In…","Sélection des pièces manquantes…"];
+async function startAnalysis(){if(!S.imgs.length)return;S.audace=parseInt(document.getElementById('r-aud').value);go('pg-load');let pct=0,step=0;const fill=document.getElementById('ld-fill');const stepEl=document.getElementById('ld-s');const timer=setInterval(()=>{pct=Math.min(pct+2,88);fill.style.width=pct+'%';if(pct%18<2&&step<LD_STEPS.length)stepEl.textContent=LD_STEPS[step++];},220);const sys=`Tu es Drip'In — styliste IA expert de mode, aussi précis et bienveillant qu'un vrai styliste professionnel.\nPROFIL: styles=${S.styles.join(', ')||'Non défini'}, occasion=${S.occasion}, morpho=${S.morpho}, palette=${S.palette}, saison=${S.saison}, question="${S.question}", audace=${S.audace}/10, budget=${S.budget}, inspos=${S.inspos.join(', ')||'Non précisé'}.\n${S.imgs.length>1?`L'utilisateur a envoyé ${S.imgs.length} photos — il hésite entre des pièces ou veut savoir comment les combiner. Réponds directement à cette question en priorité.`:''}`;const content=[...S.imgs.map(img=>({type:'image',source:{type:'base64',media_type:'image/jpeg',data:img.b64}})),{type:'text',text:`Analyse ces ${S.imgs.length} photo(s). JSON strict uniquement:\n{"note_globale":<0-10 décimal>,"verdict":"<accroche percutante de styliste>","tags":["t1","t2","t3","t4"],"scores":{"Cohérence stylistique":<0-10>,"Harmonie des couleurs":<0-10>,"Adaptation à l'occasion":<0-10>,"Valorisation morpho":<0-10>,"Qualité des matières":<0-10>,"Équilibre proportions":<0-10>,"Modernité tendance":<0-10>},"reponse_question":"<réponse directe et précise à: ${S.question}>","points_forts":["<précis 1>","<précis 2>","<précis 3>"],"a_ameliorer":["<actionnable 1>","<actionnable 2>","<actionnable 3>"],"conseil_stylist":"<conseil 4-5 phrases: pièces exactes, techniques styling, comment porter différemment>","regles_mode":["<règle 1>","<règle 2>"],"pieces_manquantes":[{"piece":"<nom>","pourquoi":"<explication>","shopping":"<marque + prix budget ${S.budget}>"},{"piece":"<p2>","pourquoi":"<e>","shopping":"<m+p>"},{"piece":"<p3>","pourquoi":"<e>","shopping":"<m+p>"}],"coup_de_coeur":"<la meilleure chose>","tendance_saison":"<positionnement tendances ${S.saison} 2024>"}`}];
+try{const res=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,system:sys,messages:[{role:'user',content}]})});clearInterval(timer);fill.style.width='100%';const data=await res.json();if(data.error)throw new Error(data.error.message||JSON.stringify(data.error));const d=JSON.parse(data.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim());renderRes(d);setTimeout(()=>{go('pg-res');document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));document.getElementById('nb-up').classList.add('on')},300);}catch(err){clearInterval(timer);go('pg-res');document.getElementById('res-bd').innerHTML=`<div class="err-box"><strong>Erreur Drip'In</strong><br>${err.message}<br><br>Vérifie que ta clé API Anthropic est configurée dans Vercel (ANTHROPIC_API_KEY).</div>`;document.getElementById('r-note').textContent='!';document.getElementById('r-verd').textContent='Connexion impossible';}
 }
-function navTo(pg,nb){
-  go(pg);
-  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
-  document.getElementById(nb).classList.add('on');
-}
-function buildGal(filter){
-  const catLabel = CAT;
-  let items = filter==='all'?[...GAL]:GAL.filter(s=>s.cat===filter);
-  let html = items.map(s=>`
-    <div class="gc${s.big?' big':''}${chosen.has(s.id)?' chosen':''}" data-id="${s.id}" onclick="toggleCard(this,'${s.id}')">
-      <img src="${s.img}" alt="${s.name}" loading="lazy">
-      <div class="cat-lbl">${catLabel[s.cat]||s.cat.toUpperCase()}</div>
-      <button class="gc-pick" onclick="event.stopPropagation();toggleCard(this.closest('.gc'),'${s.id}')">${chosen.has(s.id)?'✓':'+ Choisir'}</button>
-      <div class="gc-lbl"><div class="gc-name">${s.name}</div><div class="gc-sub">${s.sub}</div></div>
-    </div>`).join('');
-  if(filter==='all'||Object.keys(PH).includes(filter)){
-    const phCats=filter==='all'?Object.keys(PH):[filter];
-    phCats.forEach(cat=>{
-      const p=PH[cat];if(!p)return;
-      html+=`<div class="ph-card" style="background:${p.bg}">
-        <div class="ph-ic">${p.ic}</div>
-        <div class="ph-name">${p.name}</div>
-        <div class="ph-sub">${p.sub}</div>
-        <div class="ph-soon">Photos bientôt</div>
-      </div>`;
-    });
-  }
-  document.getElementById('gg').innerHTML=html;
-}
-function toggleCard(el,id){
-  if(chosen.has(id)){chosen.delete(id);el.classList.remove('chosen')}
-  else{chosen.add(id);el.classList.add('chosen')}
-  S.styles=[...chosen].map(cid=>GAL.find(g=>g.id===cid)?.name).filter(Boolean);
-  document.getElementById('btn-gal').disabled=chosen.size===0;
-  el.querySelector('.gc-pick').textContent=chosen.has(id)?'✓':'+ Choisir';
-}
-function ft(el,cat){
-  document.querySelectorAll('#tabs .tb').forEach(t=>t.classList.remove('on'));
-  el.classList.add('on');buildGal(cat);
-}
-function pick(el,gid){
-  document.querySelectorAll('#'+gid+' .chip').forEach(c=>c.classList.remove('on'));
-  el.classList.add('on');
-  const m={'c-occ':'occasion','c-mor':'morpho','c-pal':'palette','c-sai':'saison','c-q':'question','c-bud':'budget'};
-  if(m[gid])S[m[gid]]=el.textContent.trim();
-}
-function tog(el){
-  el.classList.toggle('on');
-  S.inspos=[...document.querySelectorAll('#c-ins .chip.on')].map(c=>c.textContent.trim());
-}
-function updatePill(){
-  const st=S.styles.length?S.styles.slice(0,2).join(' · '):'Mon style';
-  document.getElementById('pp-b').textContent=st;
-  document.getElementById('pp-s').textContent=S.morpho+' · '+S.palette+' · '+S.saison;
-  document.getElementById('pp-av').textContent=S.styles.length?S.styles[0][0]:'D';
-}
-function compressImg(file,cb){
-  const r=new FileReader();
-  r.onload=ev=>{
-    const img=new Image();
-    img.onload=()=>{
-      const canvas=document.createElement('canvas');
-      let w=img.width,h=img.height,max=1024;
-      if(w>max||h>max){if(w>h){h=Math.round(h*max/w);w=max;}else{w=Math.round(w*max/h);h=max;}}
-      canvas.width=w;canvas.height=h;
-      canvas.getContext('2d').drawImage(img,0,0,w,h);
-      const data=canvas.toDataURL('image/jpeg',0.75);
-      cb({b64:data.split(',')[1],url:data});
-    };
-    img.src=ev.target.result;
-  };
-  r.readAsDataURL(file);
-}
-function handleFiles(e){
-  const files=[...e.target.files].slice(0,3-S.imgs.length);
-  if(!files.length)return;
-  let loaded=0;
-  files.forEach(file=>{
-    compressImg(file,img=>{
-      S.imgs.push(img);
-      loaded++;if(loaded===files.length)renderPvws();
-    });
-  });
-}
-function renderPvws(){
-  const labels=["Outfit principal","2ème pièce / hésitation","3ème pièce"];
-  document.getElementById('pvws').innerHTML=S.imgs.map((img,i)=>`
-    <div class="pvw">
-      <img src="${img.url}" alt="photo ${i+1}">
-      <div class="pvw-lbl">${labels[i]}</div>
-      <button class="pvw-rm" onclick="rmImg(${i})">✕</button>
-    </div>`).join('');
-  document.getElementById('pvws').style.display='flex';
-  document.getElementById('dz').style.display=S.imgs.length>=3?'none':'flex';
-  document.getElementById('add-more').style.display=S.imgs.length>0&&S.imgs.length<3?'flex':'none';
-  document.getElementById('btn-analyze').disabled=S.imgs.length===0;
-}
-function rmImg(i){
-  S.imgs.splice(i,1);
-  if(!S.imgs.length){
-    document.getElementById('pvws').style.display='none';
-    document.getElementById('dz').style.display='flex';
-    document.getElementById('add-more').style.display='none';
-    document.getElementById('btn-analyze').disabled=true;
-  } else renderPvws();
-}
-const dz=document.getElementById('dz');
-dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag')});
-dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
-dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');handleFiles({target:{files:e.dataTransfer.files}})});
-
-const LD_STEPS=[
-  "Identification des pièces et matières…",
-  "Analyse des couleurs et proportions…",
-  "Évaluation par rapport à ton profil…",
-  "Génération des conseils Drip'In…",
-  "Sélection des pièces manquantes…"
-];
-
-async function startAnalysis(){
-  if(!S.imgs.length)return;
-  S.audace=parseInt(document.getElementById('r-aud').value);
-  go('pg-load');
-  let pct=0,step=0;
-  const fill=document.getElementById('ld-fill');
-  const stepEl=document.getElementById('ld-s');
-  const timer=setInterval(()=>{
-    pct=Math.min(pct+2,88);fill.style.width=pct+'%';
-    if(pct%18<2&&step<LD_STEPS.length)stepEl.textContent=LD_STEPS[step++];
-  },220);
-  const sys=`Tu es Drip'In — styliste IA expert de mode, aussi précis et bienveillant qu'un vrai styliste professionnel.
-PROFIL: styles=${S.styles.join(', ')||'Non défini'}, occasion=${S.occasion}, morpho=${S.morpho}, palette=${S.palette}, saison=${S.saison}, question="${S.question}", audace=${S.audace}/10, budget=${S.budget}, inspos=${S.inspos.join(', ')||'Non précisé'}.
-${S.imgs.length>1?`L'utilisateur a envoyé ${S.imgs.length} photos — il hésite entre des pièces ou veut savoir comment les combiner. Réponds directement à cette question en priorité.`:''}`;
-  const content=[
-    ...S.imgs.map(img=>({type:'image',source:{type:'base64',media_type:'image/jpeg',data:img.b64}})),
-    {type:'text',text:`Analyse ces ${S.imgs.length} photo(s). JSON strict uniquement:\n{"note_globale":<0-10 décimal>,"verdict":"<accroche percutante de styliste>","tags":["t1","t2","t3","t4"],"scores":{"Cohérence stylistique":<0-10>,"Harmonie des couleurs":<0-10>,"Adaptation à l'occasion":<0-10>,"Valorisation morpho":<0-10>,"Qualité des matières":<0-10>,"Équilibre proportions":<0-10>,"Modernité tendance":<0-10>},"reponse_question":"<réponse directe et précise à: ${S.question}>","points_forts":["<précis 1>","<précis 2>","<précis 3>"],"a_ameliorer":["<actionnable 1>","<actionnable 2>","<actionnable 3>"],"conseil_stylist":"<conseil 4-5 phrases: pièces exactes, techniques styling, comment porter différemment>","regles_mode":["<règle 1>","<règle 2>"],"pieces_manquantes":[{"piece":"<nom>","pourquoi":"<explication>","shopping":"<marque + prix budget ${S.budget}>"},{"piece":"<p2>","pourquoi":"<e>","shopping":"<m+p>"},{"piece":"<p3>","pourquoi":"<e>","shopping":"<m+p>"}],"coup_de_coeur":"<la meilleure chose>","tendance_saison":"<positionnement tendances ${S.saison} 2024>"}`}
-  ];
-  try{
-    const res=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,system:sys,messages:[{role:'user',content}]})});
-    clearInterval(timer);fill.style.width='100%';
-    const data=await res.json();
-    if(data.error)throw new Error(data.error.message||JSON.stringify(data.error));
-    const d=JSON.parse(data.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim());
-    renderRes(d);
-    setTimeout(()=>{go('pg-res');document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));document.getElementById('nb-up').classList.add('on')},300);
-  }catch(err){
-    clearInterval(timer);
-    go('pg-res');
-    document.getElementById('res-bd').innerHTML=`<div class="err-box"><strong>Erreur Drip'In</strong><br>${err.message}<br><br>Vérifie que ta clé API Anthropic est configurée dans Vercel (ANTHROPIC_API_KEY).</div>`;
-    document.getElementById('r-note').textContent='!';
-    document.getElementById('r-verd').textContent='Connexion impossible';
-  }
-}
-
-function renderRes(d){
-  const nc=d.note_globale>=7?'#22c55e':d.note_globale>=5?'#f59e0b':'#ef4444';
-  document.getElementById('r-note').textContent=d.note_globale;
-  document.getElementById('r-note').style.color=nc;
-  document.getElementById('r-verd').textContent='"'+d.verdict+'"';
-  document.getElementById('r-tags').innerHTML=(d.tags||[]).map(t=>`<span class="rtag">${t}</span>`).join('');
-  const b=document.getElementById('res-bd');
-  const sc=Object.entries(d.scores||{}).map(([k,v])=>`<div class="sc-row"><div class="sc-l">${k}</div><div class="sc-track"><div class="sc-fill" data-w="${v*10}" style="width:0%"></div></div><div class="sc-v">${v}</div></div>`).join('');
-  const fo=(d.points_forts||[]).map(p=>`<div class="fbi"><span class="fbi-ic" style="color:#22c55e">✓</span>${p}</div>`).join('');
-  const am=(d.a_ameliorer||[]).map(p=>`<div class="fbi"><span class="fbi-ic" style="color:#f59e0b">→</span>${p}</div>`).join('');
-  const re=(d.regles_mode||[]).map(r=>`<div class="fbi"><span class="fbi-ic">📐</span>${r}</div>`).join('');
-  const pi=(d.pieces_manquantes||[]).map((p,i)=>`<div class="piece-card"><div class="piece-n">PIÈCE ${i+1}</div><div class="piece-name">${p.piece||''}</div><div class="piece-why">${p.pourquoi||''}</div><div class="piece-shop">🛍 ${p.shopping||''}</div></div>`).join('');
-  b.innerHTML=
-    `<div><div class="rsec">SCORES DÉTAILLÉS</div><div class="sc-grid">${sc}</div></div>`+
-    `<div class="divider"></div>`+
-    (d.reponse_question?`<div><div class="rsec">RÉPONSE À TA QUESTION</div><div class="q-box"><div class="q-lbl">💬 ${S.question}</div><div class="q-txt">${d.reponse_question}</div></div></div>`:'')+
-    `<div><div class="rsec">CE QUI MARCHE ✓</div><div class="fbl">${fo}</div></div>`+
-    `<div><div class="rsec">À AMÉLIORER →</div><div class="fbl">${am}</div></div>`+
-    `<div class="conseil"><div class="conseil-lbl">✦ Conseil Drip'In</div><div class="conseil-txt">${d.conseil_stylist||''}</div></div>`+
-    (re?`<div><div class="rsec">RÈGLES DE MODE</div><div class="fbl">${re}</div></div>`:'')+
-    `<div><div class="rsec">PIÈCES MANQUANTES</div><div style="display:flex;flex-direction:column;gap:.55rem">${pi}</div></div>`+
-    `<div><div class="rsec">COUP DE CŒUR ❤</div><div class="lb-box">${d.coup_de_coeur||''}</div></div>`+
-    `<div><div class="rsec">TENDANCE SAISON</div><div class="lb-box">${d.tendance_saison||''}</div></div>`+
-    `<div style="padding-bottom:2rem"><button class="btn" onclick="resetUp()">NOUVELLE ANALYSE →</button></div>`;
-  setTimeout(()=>{b.querySelectorAll('.sc-fill').forEach(el=>{el.style.transition='width 1s ease';el.style.width=el.dataset.w+'%'})},200);
-}
-
-function resetUp(){
-  S.imgs=[];
-  document.getElementById('pvws').innerHTML='';
-  document.getElementById('pvws').style.display='none';
-  document.getElementById('dz').style.display='flex';
-  document.getElementById('add-more').style.display='none';
-  document.getElementById('btn-analyze').disabled=true;
-  document.getElementById('fi').value='';
-  go('pg-up');
-  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
-  document.getElementById('nb-up').classList.add('on');
-}
-
+function renderRes(d){const nc=d.note_globale>=7?'#22c55e':d.note_globale>=5?'#f59e0b':'#ef4444';document.getElementById('r-note').textContent=d.note_globale;document.getElementById('r-note').style.color=nc;document.getElementById('r-verd').textContent='"'+d.verdict+'"';document.getElementById('r-tags').innerHTML=(d.tags||[]).map(t=>`<span class="rtag">${t}</span>`).join('');const b=document.getElementById('res-bd');const sc=Object.entries(d.scores||{}).map(([k,v])=>`<div class="sc-row"><div class="sc-l">${k}</div><div class="sc-track"><div class="sc-fill" data-w="${v*10}" style="width:0%"></div></div><div class="sc-v">${v}</div></div>`).join('');const fo=(d.points_forts||[]).map(p=>`<div class="fbi"><span class="fbi-ic" style="color:#22c55e">✓</span>${p}</div>`).join('');const am=(d.a_ameliorer||[]).map(p=>`<div class="fbi"><span class="fbi-ic" style="color:#f59e0b">→</span>${p}</div>`).join('');const re=(d.regles_mode||[]).map(r=>`<div class="fbi"><span class="fbi-ic">📐</span>${r}</div>`).join('');const pi=(d.pieces_manquantes||[]).map((p,i)=>`<div class="piece-card"><div class="piece-n">PIÈCE ${i+1}</div><div class="piece-name">${p.piece||''}</div><div class="piece-why">${p.pourquoi||''}</div><div class="piece-shop">🛍 ${p.shopping||''}</div></div>`).join('');b.innerHTML=`<div><div class="rsec">SCORES DÉTAILLÉS</div><div class="sc-grid">${sc}</div></div><div class="divider"></div>${d.reponse_question?`<div><div class="rsec">RÉPONSE À TA QUESTION</div><div class="q-box"><div class="q-lbl">💬 ${S.question}</div><div class="q-txt">${d.reponse_question}</div></div></div>`:''}<div><div class="rsec">CE QUI MARCHE ✓</div><div class="fbl">${fo}</div></div><div><div class="rsec">À AMÉLIORER →</div><div class="fbl">${am}</div></div><div class="conseil"><div class="conseil-lbl">✦ Conseil Drip'In</div><div class="conseil-txt">${d.conseil_stylist||''}</div></div>${re?`<div><div class="rsec">RÈGLES DE MODE</div><div class="fbl">${re}</div></div>`:''}<div><div class="rsec">PIÈCES MANQUANTES</div><div style="display:flex;flex-direction:column;gap:.55rem">${pi}</div></div><div><div class="rsec">COUP DE CŒUR ❤</div><div class="lb-box">${d.coup_de_coeur||''}</div></div><div><div class="rsec">TENDANCE SAISON</div><div class="lb-box">${d.tendance_saison||''}</div></div><div style="padding-bottom:2rem"><button class="btn" onclick="resetUp()">NOUVELLE ANALYSE →</button></div>`;setTimeout(()=>{b.querySelectorAll('.sc-fill').forEach(el=>{el.style.transition='width 1s ease';el.style.width=el.dataset.w+'%'})},200);}
+function resetUp(){S.imgs=[];document.getElementById('pvws').innerHTML='';document.getElementById('pvws').style.display='none';document.getElementById('dz').style.display='flex';document.getElementById('add-more').style.display='none';document.getElementById('btn-analyze').disabled=true;document.getElementById('fi').value='';go('pg-up');document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));document.getElementById('nb-up').classList.add('on');}
 buildGal('all');
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
