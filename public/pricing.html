@@ -8,6 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="Drip'In">
 <meta name="theme-color" content="#000000">
 <title>Drip'In — Passer Pro</title>
+<link rel="stylesheet" href="/desktop.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -24,26 +25,18 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
 .screen{flex:1;display:flex;flex-direction:column;overflow:hidden}
 .scr{overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
 .scr::-webkit-scrollbar{width:0}
-
-/* HEADER */
 .shdr{padding:.85rem 1.5rem .55rem;border-bottom:.5px solid var(--lg);flex-shrink:0;background:var(--white)}
 .srow{display:flex;align-items:center;justify-content:space-between;margin-bottom:.2rem}
 .stitle{font-family:'Bebas Neue';font-size:25px;letter-spacing:.5px}
 .sback{font-size:11px;color:var(--gray);cursor:pointer;display:flex;align-items:center;gap:3px;text-decoration:none}
 .sback:hover{color:var(--black)}
 .ssub{font-size:11px;color:var(--gray)}
-
-/* BODY */
 .bd{padding:1rem 1.5rem;display:flex;flex-direction:column;gap:.9rem;padding-bottom:2rem}
-
-/* BADGE PRO ACTIF */
 .pro-active{background:var(--dark);border-radius:16px;padding:.9rem 1.1rem;display:none;align-items:center;gap:.75rem}
 .pro-active.show{display:flex}
 .pro-active-ic{font-size:1.3rem}
 .pro-active-txt strong{display:block;font-family:'Bebas Neue';font-size:17px;letter-spacing:.5px;color:var(--white)}
 .pro-active-txt span{font-size:10px;color:rgba(255,255,255,.45);font-weight:500}
-
-/* CRÉDITS BAR */
 .cred-box{background:#f8f8f8;border-radius:16px;padding:.85rem 1rem;display:none}
 .cred-box.show{display:block}
 .cred-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.55rem}
@@ -54,8 +47,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
 .cred-fill{height:100%;background:var(--black);border-radius:2px;transition:width .6s ease}
 .cred-hint{font-size:10.5px;color:var(--gray);line-height:1.5}
 .cred-reset{font-size:9.5px;color:var(--gray);opacity:.7;margin-top:2px}
-
-/* PLAN CARDS */
 .plan{border-radius:20px;overflow:hidden;border:1.5px solid var(--lg)}
 .plan-head{padding:1.1rem 1.25rem .85rem}
 .plan-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 11px;border-radius:50px;margin-bottom:.75rem}
@@ -73,16 +64,12 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
 .pf-ic.on{color:var(--black)}
 .pf-ic.no{color:#d0d0d0}
 .plan-foot{padding:.85rem 1.25rem}
-
-/* PRO dark head */
 .plan-pro .plan-head{background:var(--dark)}
 .plan-pro .plan-period{color:rgba(255,255,255,.4)}
 .plan-pro .plan-features{background:var(--dark)}
 .plan-pro .plan-features .pf{border-bottom-color:rgba(255,255,255,.07);color:rgba(255,255,255,.85)}
 .plan-pro .plan-features .pf:last-child{border-bottom:none}
 .plan-pro .plan-foot{background:var(--dark)}
-
-/* BOUTON */
 .btn{width:100%;background:var(--black);color:var(--white);border:none;border-radius:50px;padding:.82rem 1.25rem;font-family:'Bebas Neue';font-size:20px;letter-spacing:1px;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:space-between}
 .btn:hover{background:#222}
 .btn:disabled{opacity:.3;cursor:not-allowed}
@@ -91,13 +78,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
 .btn-ghost:hover{border-color:var(--black);color:var(--black);background:transparent}
 .btn-arr{opacity:.4;font-size:15px;letter-spacing:-2px}
 .btn.loading{opacity:.55;pointer-events:none}
-
-/* SÉPARATEUR */
 .or-sep{display:flex;align-items:center;gap:.75rem}
 .or-sep::before,.or-sep::after{content:'';flex:1;height:.5px;background:var(--lg)}
 .or-sep span{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gray)}
-
-/* CODE PROMO */
 .promo-wrap{border:1.5px solid var(--lg);border-radius:16px;overflow:hidden}
 .promo-head{padding:.7rem 1rem;display:flex;align-items:center;gap:.5rem;cursor:pointer;background:var(--white)}
 .promo-head-lbl{font-size:11px;font-weight:600;color:var(--gray);flex:1}
@@ -113,18 +96,32 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
 .promo-msg{font-size:10.5px;margin-top:.5rem;line-height:1.4}
 .promo-msg.ok{color:#16a34a}
 .promo-msg.err{color:#dc2626}
-
-/* GARANTIE */
 .guarantee{text-align:center;font-size:10px;color:var(--gray);line-height:1.9}
 .guarantee a{color:var(--accent);text-decoration:none}
-
-/* TOAST */
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--black);color:#fff;font-size:12px;font-weight:600;padding:.7rem 1.4rem;border-radius:50px;transition:transform .35s cubic-bezier(.16,1,.3,1);z-index:100;white-space:nowrap;pointer-events:none}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .toast.err{background:#c0392b}
 </style>
 </head>
 <body>
+
+<!-- PANNEAU GAUCHE DESKTOP (invisible sur mobile) -->
+<div class="desktop-panel">
+  <img class="desktop-panel-img" src="/images/minimal_5.webp" alt="">
+  <div class="desktop-panel-overlay"></div>
+  <div class="desktop-panel-content">
+    <div class="desktop-panel-eyebrow">AI Style Coach · Mode Expert</div>
+    <div class="desktop-panel-logo">DRIP<span>'</span>IN</div>
+    <div class="desktop-panel-tagline">"L'IA qui voit ce que tu portes."</div>
+    <div class="desktop-panel-features">
+      <div class="desktop-panel-feature"><span class="desktop-panel-feature-ic">✦</span>5 analyses gratuites par mois</div>
+      <div class="desktop-panel-feature"><span class="desktop-panel-feature-ic">✦</span>Conseils de styliste pro</div>
+      <div class="desktop-panel-feature"><span class="desktop-panel-feature-ic">✦</span>Pièces manquantes &amp; shopping</div>
+      <div class="desktop-panel-feature"><span class="desktop-panel-feature-ic">✦</span>Pro — analyses illimitées</div>
+    </div>
+  </div>
+</div>
+
 <div class="frame">
   <div class="notch"></div>
   <div class="screen">
@@ -139,7 +136,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
 
     <div class="scr"><div class="bd">
 
-      <!-- Pro actif -->
       <div class="pro-active" id="pro-active">
         <span class="pro-active-ic">✦</span>
         <div class="pro-active-txt">
@@ -148,7 +144,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
         </div>
       </div>
 
-      <!-- Crédits restants (free) -->
       <div class="cred-box" id="cred-box">
         <div class="cred-top">
           <span class="cred-lbl">Analyses ce mois-ci</span>
@@ -159,7 +154,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
         <p class="cred-reset" id="cred-reset"></p>
       </div>
 
-      <!-- ── PLAN FREE ── -->
       <div class="plan plan-free">
         <div class="plan-head">
           <div class="plan-tag">Gratuit</div>
@@ -170,7 +164,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
         <div class="plan-features">
           <div class="pf"><span class="pf-ic on">✦</span><span><b>5 analyses par mois</b> — remises le 1er</span></div>
           <div class="pf"><span class="pf-ic on">✦</span>Tous les styles disponibles</div>
-          <div class="pf"><span class="pf-ic on">✦</span>Profil & préférences sauvegardés</div>
+          <div class="pf"><span class="pf-ic on">✦</span>Profil &amp; préférences sauvegardés</div>
           <div class="pf"><span class="pf-ic on">✦</span>Scores détaillés + conseils</div>
           <div class="pf off"><span class="pf-ic no">—</span>Analyses illimitées</div>
           <div class="pf off"><span class="pf-ic no">—</span>Historique complet</div>
@@ -186,7 +180,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
 
       <div class="or-sep"><span>ou</span></div>
 
-      <!-- ── PLAN PRO ── -->
       <div class="plan plan-pro">
         <div class="plan-head">
           <div class="plan-tag">Pro</div>
@@ -197,9 +190,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
         <div class="plan-features">
           <div class="pf"><span class="pf-ic" style="color:var(--accent)">✦</span><b style="color:#fff">Analyses illimitées</b></div>
           <div class="pf"><span class="pf-ic" style="color:var(--accent)">✦</span>Tous les styles disponibles</div>
-          <div class="pf"><span class="pf-ic" style="color:var(--accent)">✦</span>Profil & préférences sauvegardés</div>
+          <div class="pf"><span class="pf-ic" style="color:var(--accent)">✦</span>Profil &amp; préférences sauvegardés</div>
           <div class="pf"><span class="pf-ic" style="color:var(--accent)">✦</span>Scores détaillés + conseils styliste</div>
-          <div class="pf"><span class="pf-ic" style="color:var(--accent)">✦</span><span>Historique de tes 30 dernières analyses</span></div>
+          <div class="pf"><span class="pf-ic" style="color:var(--accent)">✦</span>Historique de tes 30 dernières analyses</div>
           <div class="pf"><span class="pf-ic" style="color:var(--accent)">✦</span>Nouveaux styles en avant-première</div>
           <div class="pf"><span class="pf-ic" style="color:var(--accent)">✦</span>Support prioritaire</div>
         </div>
@@ -211,7 +204,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
         </div>
       </div>
 
-      <!-- ── CODE PROMO ── -->
       <div class="promo-wrap">
         <div class="promo-head" onclick="togglePromo()">
           <span class="promo-head-lbl">🎁 J'ai un code promo</span>
@@ -244,23 +236,13 @@ const sb = createClient(
   'https://cnrluaseqvkjumbfwhdp.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNucmx1YXNlcXZranVtYmZ3aGRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzNzgzMjIsImV4cCI6MjA5MDk1NDMyMn0.zd_TBAnsvUfGritEEoNkYVLc-9How0D6lyxvKe8Iht8'
 );
-
 let currentSession = null;
-
 async function init() {
   const { data: { session } } = await sb.auth.getSession();
   currentSession = session;
   if (!session) return;
-
-  const { data: p } = await sb
-    .from('profiles')
-    .select('credits, credits_reset_at, plan, subscription_status, pro_analyses_this_month, pro_analyses_reset_at, is_admin')
-    .eq('id', session.user.id)
-    .single();
-
+  const { data: p } = await sb.from('profiles').select('credits, credits_reset_at, plan, subscription_status, pro_analyses_this_month, pro_analyses_reset_at, is_admin').eq('id', session.user.id).single();
   if (!p) return;
-
-  // ADMIN
   if (p.is_admin) {
     document.getElementById('pro-active').classList.add('show');
     document.getElementById('pro-active-sub').textContent = 'Accès admin · Illimité';
@@ -268,8 +250,6 @@ async function init() {
     document.getElementById('checkout-btn').disabled = true;
     return;
   }
-
-  // PRO actif
   if (p.plan === 'pro' && p.subscription_status === 'active') {
     document.getElementById('pro-active').classList.add('show');
     const remaining = 300 - (p.pro_analyses_this_month || 0);
@@ -279,38 +259,21 @@ async function init() {
     document.getElementById('checkout-btn').disabled = true;
     return;
   }
-
-  // FREE
   const c = p.credits ?? 0;
-  const pct = Math.max(0, (c / 5) * 100);
   const resetDate = new Date(p.credits_reset_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
-
   document.getElementById('cred-box').classList.add('show');
   document.getElementById('cred-num').innerHTML = `${c} <small>/ 5</small>`;
-  document.getElementById('cred-fill').style.width = pct + '%';
-  document.getElementById('cred-hint').textContent = c === 0
-    ? '⚠ Plus d\'analyses ce mois — passe Pro ou attends le reset.'
-    : `Tu as encore ${c} analyse${c > 1 ? 's' : ''} ce mois.`;
+  document.getElementById('cred-fill').style.width = Math.max(0, (c / 5) * 100) + '%';
+  document.getElementById('cred-hint').textContent = c === 0 ? '⚠ Plus d\'analyses ce mois — passe Pro ou attends le reset.' : `Tu as encore ${c} analyse${c > 1 ? 's' : ''} ce mois.`;
   document.getElementById('cred-reset').textContent = `Recharge automatique le ${resetDate}`;
 }
-
 async function handleCheckout() {
-  if (!currentSession) {
-    window.location.href = '/login.html?redirect=/pricing.html';
-    return;
-  }
+  if (!currentSession) { window.location.href = '/login.html?redirect=/pricing.html'; return; }
   const btn = document.getElementById('checkout-btn');
   btn.classList.add('loading');
   document.getElementById('checkout-label').textContent = 'REDIRECTION…';
-
   try {
-    const res = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${currentSession.access_token}`
-      }
-    });
+    const res = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${currentSession.access_token}` } });
     if (!res.ok) throw new Error();
     const { url } = await res.json();
     window.location.href = url;
@@ -320,8 +283,6 @@ async function handleCheckout() {
     showToast('Erreur — réessaie dans un instant.', true);
   }
 }
-
-// ── CODE PROMO ────────────────────────────────
 function togglePromo() {
   const body = document.getElementById('promo-body');
   const ic = document.getElementById('promo-ic');
@@ -329,74 +290,38 @@ function togglePromo() {
   ic.classList.toggle('open', open);
   if (open) document.getElementById('promo-input').focus();
 }
-
 async function redeemCode() {
-  if (!currentSession) {
-    window.location.href = '/login.html?redirect=/pricing.html';
-    return;
-  }
+  if (!currentSession) { window.location.href = '/login.html?redirect=/pricing.html'; return; }
   const code = document.getElementById('promo-input').value.trim();
   if (!code) return;
-
   const btn = document.getElementById('promo-btn');
   const msg = document.getElementById('promo-msg');
-  btn.disabled = true;
-  btn.textContent = '…';
-  msg.textContent = '';
-  msg.className = 'promo-msg';
-
+  btn.disabled = true; btn.textContent = '…'; msg.textContent = ''; msg.className = 'promo-msg';
   try {
-    const res = await fetch('/api/redeem', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${currentSession.access_token}`
-      },
-      body: JSON.stringify({ code })
-    });
+    const res = await fetch('/api/redeem', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${currentSession.access_token}` }, body: JSON.stringify({ code }) });
     const data = await res.json();
-
     if (data.success) {
-      const label = data.type === 'pro_months'
-        ? `✓ ${data.value} mois Pro activé${data.value > 1 ? 's' : ''} !`
-        : `✓ ${data.value} crédits ajoutés !`;
-      msg.textContent = label;
+      msg.textContent = data.type === 'pro_months' ? `✓ ${data.value} mois Pro activé${data.value > 1 ? 's' : ''} !` : `✓ ${data.value} crédits ajoutés !`;
       msg.className = 'promo-msg ok';
       document.getElementById('promo-input').value = '';
-      setTimeout(() => init(), 800); // rafraîchir le statut
+      setTimeout(() => init(), 800);
     } else {
-      const errors = {
-        code_not_found: 'Code invalide.',
-        code_expired:   'Ce code a expiré.',
-        code_exhausted: 'Ce code n\'est plus disponible.',
-        already_used:   'Tu as déjà utilisé ce code.'
-      };
+      const errors = { code_not_found: 'Code invalide.', code_expired: 'Ce code a expiré.', code_exhausted: 'Ce code n\'est plus disponible.', already_used: 'Tu as déjà utilisé ce code.' };
       msg.textContent = errors[data.error] || 'Erreur — réessaie.';
       msg.className = 'promo-msg err';
     }
-  } catch {
-    msg.textContent = 'Erreur réseau — réessaie.';
-    msg.className = 'promo-msg err';
-  }
-
-  btn.disabled = false;
-  btn.textContent = 'OK';
+  } catch { msg.textContent = 'Erreur réseau — réessaie.'; msg.className = 'promo-msg err'; }
+  btn.disabled = false; btn.textContent = 'OK';
 }
-
-// ── TOAST ────────────────────────────────────
 function showToast(msg, err = false) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = `toast show${err ? ' err' : ''}`;
+  t.textContent = msg; t.className = `toast show${err ? ' err' : ''}`;
   setTimeout(() => t.className = 'toast', 4000);
 }
-
-// Retour après checkout réussi
 if (new URLSearchParams(window.location.search).get('checkout') === 'success') {
   showToast("🎉 Bienvenue dans Drip'In Pro !");
   history.replaceState({}, '', '/pricing.html');
 }
-
 init();
 </script>
 </body>
