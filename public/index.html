@@ -41,7 +41,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
 .ni .ic{font-size:19px}
 .ni .lb{font-size:8px;font-weight:700;letter-spacing:.8px;color:var(--black);font-family:'Bebas Neue'}
 .ob{flex:1;background:var(--white);display:flex;flex-direction:column;overflow:hidden}
-.ob-mosaic{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:5px;padding:5px;flex:1;min-height:0}
+.ob-mosaic{overflow:hidden;flex:1;min-height:0}
 .ob-cell{border-radius:16px;overflow:hidden;background:#f0ede8}
 .ob-cell img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:.4s}
 .ob-cell:hover img{transform:scale(1.04)}
@@ -199,11 +199,10 @@ input[type=file]{display:none}
     <div class="page on" id="pg-ob">
       <div class="ob">
         <div class="ob-mosaic">
-          <div class="ob-cell"><img src="/images/minimal_1.webp" alt="Minimal" loading="eager"></div>
-          <div class="ob-cell"><img src="/images/street_6.webp" alt="Street" loading="eager"></div>
-          <div class="ob-cell"><img src="/images/oldmoney_5.webp" alt="Old Money" loading="eager"></div>
-          <div class="ob-cell"><img src="/images/paris_3.webp" alt="Paris" loading="eager"></div>
-        </div>
+  <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+    <source src="/images/InShot_20260407_172253795.mp4" type="video/mp4">
+  </video>
+</div>
         <div class="ob-bottom">
           <div class="ob-eyebrow">AI Style Coach · Mode Expert</div>
           <div class="ob-logo">DRIP<span>'</span>IN</div>
