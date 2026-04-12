@@ -446,6 +446,7 @@ const sb = createClient(
 sb.auth.getSession().then(({ data: { session } }) => {
   if (!session) window.location.href = '/login.html'
 })
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js')
 </script>
 </body>
 </html>
