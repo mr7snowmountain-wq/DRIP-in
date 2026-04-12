@@ -10,6 +10,21 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/icon-192.png">
 <title>Drip'In — Connexion</title>
+<script>
+// Capture beforeinstallprompt le plus tôt possible
+window.__pwaPrompt = null;
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  window.__pwaPrompt = e;
+  if (!localStorage.getItem('pwa-dismissed')) {
+    var b = document.getElementById('pwa-banner');
+    var a = document.getElementById('pwa-android');
+    if (b) b.style.display = 'block';
+    if (a) a.style.display = 'flex';
+  }
+});
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+</script>
 <link rel="stylesheet" href="/desktop.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap');
@@ -247,16 +262,23 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Enter') handle
   </div>
 </div>
 <script>
-if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
-let deferredPrompt;
 function dismissPwa(){ localStorage.setItem('pwa-dismissed','1'); document.getElementById('pwa-banner').style.display='none'; }
-function installApp(){ if(!deferredPrompt)return; deferredPrompt.prompt(); deferredPrompt.userChoice.then(()=>{ dismissPwa(); deferredPrompt=null; }); }
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault(); deferredPrompt = e;
-  if(!localStorage.getItem('pwa-dismissed')){ document.getElementById('pwa-banner').style.display='block'; document.getElementById('pwa-android').style.display='flex'; }
-});
+function installApp(){
+  var p = window.__pwaPrompt;
+  if(!p) return;
+  p.prompt();
+  p.userChoice.then(function(){ dismissPwa(); window.__pwaPrompt = null; });
+}
+// Si le prompt a déjà été capturé dans le <head>, afficher la bannière maintenant
+if(window.__pwaPrompt && !localStorage.getItem('pwa-dismissed')){
+  document.getElementById('pwa-banner').style.display='block';
+  document.getElementById('pwa-android').style.display='flex';
+}
 const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
-if(isIOS && !window.navigator.standalone && !localStorage.getItem('pwa-dismissed')){ document.getElementById('pwa-banner').style.display='block'; document.getElementById('pwa-ios').style.display='block'; }
+if(isIOS && !window.navigator.standalone && !localStorage.getItem('pwa-dismissed')){
+  document.getElementById('pwa-banner').style.display='block';
+  document.getElementById('pwa-ios').style.display='block';
+}
 </script>
 </body>
 </html>
