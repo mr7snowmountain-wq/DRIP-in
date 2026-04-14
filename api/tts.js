@@ -20,7 +20,7 @@ module.exports = async function handler(req, res) {
         body: JSON.stringify({
           input: { text },
           voice: { languageCode: 'fr-FR', name: 'fr-FR-Studio-A' },
-          audioConfig: { audioEncoding: 'MP3', speakingRate: 1.08, pitch: 0.0 }
+          audioConfig: { audioEncoding: 'MP3', speakingRate: 0.95, pitch: 0.0 }
         })
       }
     );
