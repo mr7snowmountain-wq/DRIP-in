@@ -1,15 +1,28 @@
+const EN_WORDS = [
+  'streetwear','street style','old money','quiet luxury','techwear','y2k',
+  'sneakers','hoodie','crop top','bucket hat','oversized','boyfriend',
+  'colorblock','color block','trench coat','wide leg','high waist',
+  'blazer fit','outfit','look','styling','must-have','total look',
+  'bodysuit','legging','jogger','tracksuit','bomber','puffer',
+  'loafers','derbies','chunky','slim fit','straight leg'
+];
+
 function toSSML(text) {
-  const escaped = text
+  let escaped = text
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 
+  // Wrap English fashion words for correct pronunciation
+  EN_WORDS.forEach(word => {
+    const re = new RegExp('\\b' + word.replace(/[-]/g,'[- ]') + '\\b', 'gi');
+    escaped = escaped.replace(re, m => `<lang xml:lang="en-US">${m}</lang>`);
+  });
+
+  // Pauses minimales uniquement sur ... et !
   const ssml = escaped
-    .replace(/\.\.\./g, '<break time="300ms"/>')
-    .replace(/!(\s|$)/g, '!<break time="250ms"/>$1')
-    .replace(/\?(\s|$)/g, '?<break time="250ms"/>$1')
-    .replace(/\.(\s|$)/g, '.<break time="200ms"/>$1')
-    .replace(/\s—\s/g, '<break time="150ms"/>');
+    .replace(/\.\.\./g, '<break time="200ms"/>')
+    .replace(/!(\s|$)/g, '!<break time="150ms"/>$1');
 
   return `<speak>${ssml}</speak>`;
 }
