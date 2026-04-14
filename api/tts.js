@@ -37,8 +37,8 @@ module.exports = async function handler(req, res) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           input: { ssml: toSSML(text) },
-          voice: { languageCode: 'fr-FR', name: 'fr-FR-Neural2-A' },
-          audioConfig: { audioEncoding: 'MP3', speakingRate: 1.0, pitch: 2.0 }
+          voice: { languageCode: 'fr-FR', name: 'fr-FR-Studio-A' },
+          audioConfig: { audioEncoding: 'MP3', speakingRate: 1.1, pitch: 0.0 }
         })
       }
     );
