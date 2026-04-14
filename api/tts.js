@@ -1,10 +1,8 @@
 const EN_WORDS = [
-  'streetwear','street style','old money','quiet luxury','techwear','y2k',
-  'sneakers','hoodie','crop top','bucket hat','oversized','boyfriend',
-  'colorblock','color block','trench coat','wide leg','high waist',
-  'blazer fit','outfit','look','styling','must-have','total look',
-  'bodysuit','legging','jogger','tracksuit','bomber','puffer',
-  'loafers','derbies','chunky','slim fit','straight leg'
+  'streetwear','old money','quiet luxury','techwear','sneakers','hoodie',
+  'crop top','bucket hat','oversized','colorblock','trench coat','wide leg',
+  'bodysuit','legging','jogger','tracksuit','bomber','puffer','loafers',
+  'chunky','outfit','styling','total look','straight leg','slim fit'
 ];
 
 function toSSML(text) {
@@ -13,10 +11,13 @@ function toSSML(text) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 
-  // Wrap English fashion words for correct pronunciation
+  // Wrap English fashion words with safe regex (no invalid ranges)
   EN_WORDS.forEach(word => {
-    const re = new RegExp('\\b' + word.replace(/[-]/g,'[- ]') + '\\b', 'gi');
-    escaped = escaped.replace(re, m => `<lang xml:lang="en-US">${m}</lang>`);
+    try {
+      const pattern = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/[\s]+/g, '[\\s]+');
+      const re = new RegExp('(?:^|\\s)(' + pattern + ')(?=\\s|[,\\.!?]|$)', 'gi');
+      escaped = escaped.replace(re, (m, w) => m.replace(w, `<lang xml:lang="en-US">${w}</lang>`));
+    } catch(e) { /* skip */ }
   });
 
   // Pauses minimales uniquement sur ... et !
