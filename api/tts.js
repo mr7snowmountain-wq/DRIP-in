@@ -5,13 +5,11 @@ function toSSML(text) {
     .replace(/>/g, '&gt;');
 
   const ssml = escaped
-    .replace(/\.\.\./g, '<break time="550ms"/>')
-    .replace(/!(\s|$)/g, '!<break time="450ms"/>$1')
-    .replace(/\?(\s|$)/g, '?<break time="450ms"/>$1')
-    .replace(/\.(\s|$)/g, '.<break time="420ms"/>$1')
-    .replace(/,(\s)/g, ',<break time="200ms"/>$1')
-    .replace(/\s—\s/g, '<break time="350ms"/>')
-    .replace(/\s:\s/g, '<break time="250ms"/>');
+    .replace(/\.\.\./g, '<break time="300ms"/>')
+    .replace(/!(\s|$)/g, '!<break time="250ms"/>$1')
+    .replace(/\?(\s|$)/g, '?<break time="250ms"/>$1')
+    .replace(/\.(\s|$)/g, '.<break time="200ms"/>$1')
+    .replace(/\s—\s/g, '<break time="150ms"/>');
 
   return `<speak>${ssml}</speak>`;
 }
