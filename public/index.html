@@ -67,7 +67,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);display:flex;justify-co
 .tb.on{background:var(--black);color:var(--white);border-color:var(--black)}
 .gg{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px 1.25rem 1.25rem}
 .gc{border-radius:16px;overflow:hidden;position:relative;cursor:pointer;height:195px;background:#f0ede8;border:2.5px solid transparent;transition:border-color .15s}
-.gc.big{grid-column:span 2;height:210px}
 .gc.chosen{border-color:var(--black)}
 .gc img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:.35s}
 .gc:hover img{transform:scale(1.04)}
@@ -418,38 +417,40 @@ input[type=file]{display:none}
 
 <script>
 const GAL=[
-{id:'m1',name:'Minimal Chic',sub:'Basiques épurés · Lignes nettes · Couleurs neutres',cat:'minimal',big:true,img:'/images/minimal_1.webp'},
-{id:'m2',name:'Quiet Luxury',sub:'Pièces structurées · Matières nobles · Ton sur ton',cat:'minimal',big:false,img:'/images/minimal_2.webp'},
-{id:'sw1',name:'Street Cargo',sub:'Cargo baggy · Sneakers chunky · Silhouette urbaine',cat:'street',big:true,img:'/images/streetwear_1.webp'},
-{id:'sw2',name:'Urban Bold',sub:'Hoodie oversize · Jogger · Cap · Swag authentique',cat:'street',big:false,img:'/images/streetwear_2.webp'},
-{id:'om1',name:'Camel Coat',sub:'Long coat camel · Pantalon tailleur · Monochrome warm',cat:'money',big:true,img:'/images/old_money_1.webp'},
-{id:'om2',name:'Dark Wealth',sub:'Col roulé · Blazer structuré · Palette sobre · Luxury discret',cat:'money',big:false,img:'/images/old_money_2.webp'},
-{id:'pa1',name:'Rive Gauche',sub:'Trench cintrée · Jean slim · Look décontracté chic',cat:'paris',big:true,img:'/images/parisien_1.webp'},
-{id:'pa2',name:'Café de Flore',sub:'Blazer oversize · Basiques français · Élégance naturelle',cat:'paris',big:false,img:'/images/parisien_2.webp'},
-{id:'sc1',name:'Sport Elite',sub:'Set premium · Sneakers blanches · Sportswear sophistiqué',cat:'sport',big:true,img:'/images/sporty_chic_1.webp'},
-{id:'sc2',name:'Active Luxe',sub:'Legging gainant · Veste tech · Palette monochrome',cat:'sport',big:false,img:'/images/sporty_chic_2.webp'},
-{id:'b1',name:'Desert Boho',sub:'Robe fluide · Sandales cuir · Accessoires naturels',cat:'boho',big:true,img:'/images/boho_1.webp'},
-{id:'b2',name:'Boho Layers',sub:'Kimono imprimé · Superpositions · Matières naturelles',cat:'boho',big:false,img:'/images/boho_2.webp'},
-{id:'y1',name:'Y2K Icons',sub:'Crop brillant · Taille basse · Accessoires flashy · 2000s',cat:'y2k',big:true,img:'/images/y2k_1.webp'},
-{id:'y2',name:'2000s Vibes',sub:'Set vinyle · Platform · Low rise · Nostalgie revisitée',cat:'y2k',big:false,img:'/images/y2k_2.webp'},
-{id:'v1',name:'70s Revival',sub:'Flares · Chemise imprimée · Boots cuir · Rétro chic',cat:'vintage',big:true,img:'/images/vintage_1.webp'},
-{id:'v2',name:'Thrift Queen',sub:'Blazer chiné · Jupe midi · Pièces vintage sélectionnées',cat:'vintage',big:false,img:'/images/vintage_2.webp'},
-{id:'t1',name:'Dark Techwear',sub:'Jacket technique · Cargo noir · Sneakers futuristes · Urban',cat:'tech',big:true,img:'/images/techwear_1.webp'},
-{id:'t2',name:'Color Tech',sub:'Windbreaker colorblock · Cargo pastel · Set technique',cat:'tech',big:false,img:'/images/techwear_2.webp'},
-{id:'cl1',name:'Timeless Élégance',sub:'Trench beige · Chemise blanche · Pantalon noir · Intemporel',cat:'classic',big:true,img:'/images/classic_1.jpg'},
-{id:'cl2',name:'Classic Power',sub:'Long coat noir · Costume cravate · All black · Autorité',cat:'classic',big:false,img:'/images/classic_2.jpg'},
-{id:'mu1',name:'Modest Street',sub:'Qamis brodé · Kufi · Style masculin moderne et épuré',cat:'muslim',big:true,img:'/images/muslim_1.webp'},
-{id:'mu2',name:'Abaya Élégante',sub:'Abaya brodée dorée · Hijab noir · Sophistication orientale',cat:'muslim',big:false,img:'/images/muslim_2.webp'},
-{id:'mc1',name:'Pure Élégance',sub:'Cape blanche · Pantalon tailleur · Total white · Hijab assorti',cat:'muslimchic',big:true,img:'/images/muslim_chic_1.webp'},
-{id:'mc2',name:'Modest Chic',sub:'Long coat kaki · Pantalon large · Hijab nude · Chic contemporain',cat:'muslimchic',big:false,img:'/images/muslim_chic_2.webp'}
+{id:'m1',name:'Minimal Chic',sub:'Basiques épurés · Lignes nettes · Couleurs neutres',cat:'minimal',img:'/images/minimal_1.webp'},
+{id:'m2',name:'Quiet Luxury',sub:'Pièces structurées · Matières nobles · Ton sur ton',cat:'minimal',img:'/images/minimal_2.webp'},
+{id:'sw1',name:'Street Cargo',sub:'Cargo baggy · Sneakers chunky · Silhouette urbaine',cat:'street',img:'/images/streetwear_1.webp'},
+{id:'sw2',name:'Urban Bold',sub:'Hoodie oversize · Jogger · Cap · Swag authentique',cat:'street',img:'/images/streetwear_2.webp'},
+{id:'om1',name:'Camel Coat',sub:'Long coat camel · Pantalon tailleur · Monochrome warm',cat:'money',img:'/images/old_money_1.webp'},
+{id:'om2',name:'Dark Wealth',sub:'Col roulé · Blazer structuré · Palette sobre · Luxury discret',cat:'money',img:'/images/old_money_2.webp'},
+{id:'pa1',name:'Rive Gauche',sub:'Trench cintrée · Jean slim · Look décontracté chic',cat:'paris',img:'/images/parisien_1.webp'},
+{id:'pa2',name:'Café de Flore',sub:'Blazer oversize · Basiques français · Élégance naturelle',cat:'paris',img:'/images/parisien_2.webp'},
+{id:'sc1',name:'Sport Elite',sub:'Set premium · Sneakers blanches · Sportswear sophistiqué',cat:'sport',img:'/images/sporty_chic_1.webp'},
+{id:'sc2',name:'Active Luxe',sub:'Legging gainant · Veste tech · Palette monochrome',cat:'sport',img:'/images/sporty_chic_2.webp'},
+{id:'b1',name:'Desert Boho',sub:'Robe fluide · Sandales cuir · Accessoires naturels',cat:'boho',img:'/images/boho_1.webp'},
+{id:'b2',name:'Boho Layers',sub:'Kimono imprimé · Superpositions · Matières naturelles',cat:'boho',img:'/images/boho_2.webp'},
+{id:'y1',name:'Y2K Icons',sub:'Crop brillant · Taille basse · Accessoires flashy · 2000s',cat:'y2k',img:'/images/y2k_1.webp'},
+{id:'y2',name:'2000s Vibes',sub:'Set vinyle · Platform · Low rise · Nostalgie revisitée',cat:'y2k',img:'/images/y2k_2.webp'},
+{id:'v1',name:'70s Revival',sub:'Flares · Chemise imprimée · Boots cuir · Rétro chic',cat:'vintage',img:'/images/vintage_1.webp'},
+{id:'v2',name:'Thrift Queen',sub:'Blazer chiné · Jupe midi · Pièces vintage sélectionnées',cat:'vintage',img:'/images/vintage_2.webp'},
+{id:'t1',name:'Dark Techwear',sub:'Jacket technique · Cargo noir · Sneakers futuristes · Urban',cat:'tech',img:'/images/techwear_1.webp'},
+{id:'t2',name:'Color Tech',sub:'Windbreaker colorblock · Cargo pastel · Set technique',cat:'tech',img:'/images/techwear_2.webp'},
+{id:'cl1',name:'Timeless Élégance',sub:'Trench beige · Chemise blanche · Pantalon noir · Intemporel',cat:'classic',img:'/images/classic_1.jpg'},
+{id:'cl2',name:'Classic Power',sub:'Long coat noir · Costume cravate · All black · Autorité',cat:'classic',img:'/images/classic_2.jpg'},
+{id:'mu1',name:'Modest Street',sub:'Qamis brodé · Kufi · Style masculin moderne et épuré',cat:'muslim',img:'/images/muslim_1.webp'},
+{id:'mu2',name:'Abaya Élégante',sub:'Abaya brodée dorée · Hijab noir · Sophistication orientale',cat:'muslim',img:'/images/muslim_2.webp'},
+{id:'mc1',name:'Pure Élégance',sub:'Cape blanche · Pantalon tailleur · Total white · Hijab assorti',cat:'muslimchic',img:'/images/muslim_chic_1.webp'},
+{id:'mc2',name:'Modest Chic',sub:'Long coat kaki · Pantalon large · Hijab nude · Chic contemporain',cat:'muslimchic',img:'/images/muslim_chic_2.webp'},
+{id:'da1',name:'Oxford Mood',sub:'Blazer tweed bordeaux · Col roulé noir · Pantalon camel · Loafers',cat:'dark',img:'/images/dark_academia_1.webp'},
+{id:'da2',name:'Scholar Chic',sub:'Blazer camel · Col roulé bordeaux · Pantalon marron · Lunettes rondes',cat:'dark',img:'/images/dark_academia_2.webp'}
 ];
-const PH={dark:{bg:'#2a2318',ic:'📚',name:'Dark Academia',sub:'Marron · Tweed · Layering'},biz:{bg:'#2c4a7c',ic:'💼',name:'Business',sub:'Navy · Costume · Tailored'}};
+const PH={biz:{bg:'#2c4a7c',ic:'💼',name:'Business',sub:'Navy · Costume · Tailored'}};
 const CAT={minimal:'MINIMAL',street:'STREET',money:'OLD MONEY',paris:'PARISIEN',sport:'SPORTY',boho:'BOHO',y2k:'Y2K',vintage:'VINTAGE',tech:'TECHWEAR',classic:'CLASSIC',muslim:'MUSLIM',muslimchic:'MUSLIM CHIC',dark:'DARK ACADEMIA',biz:'BUSINESS'};
 const S={styles:[],occasion:'Quotidien',morpho:'Sablier',palette:'Neutres / Beige',saison:'Automne',question:"J'hésite entre plusieurs pièces",audace:5,budget:'Mid-range',inspos:['A.P.C'],imgs:[]};
 const chosen=new Set();
 function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));document.getElementById(id).classList.add('on');const showNav=['pg-up','pg-gal','pg-crit','pg-res'].includes(id);document.getElementById('navbar').style.display=showNav?'flex':'none';if(id==='pg-up')updatePill();}
 function navTo(pg,nb){go(pg);document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));document.getElementById(nb).classList.add('on');}
-function buildGal(filter){const catLabel=CAT;let items=filter==='all'?[...GAL]:GAL.filter(s=>s.cat===filter);let html=items.map(s=>`<div class="gc${s.big?' big':''}${chosen.has(s.id)?' chosen':''}" data-id="${s.id}" onclick="toggleCard(this,'${s.id}')"><img src="${s.img}" alt="${s.name}" loading="lazy"><div class="cat-lbl">${catLabel[s.cat]||s.cat.toUpperCase()}</div><button class="gc-pick" onclick="event.stopPropagation();toggleCard(this.closest('.gc'),'${s.id}')">${chosen.has(s.id)?'✓':'+ Choisir'}</button><div class="gc-lbl"><div class="gc-name">${s.name}</div><div class="gc-sub">${s.sub}</div></div></div>`).join('');if(filter==='all'||Object.keys(PH).includes(filter)){const phCats=filter==='all'?Object.keys(PH):[filter];phCats.forEach(cat=>{const p=PH[cat];if(!p)return;html+=`<div class="ph-card" style="background:${p.bg}"><div class="ph-ic">${p.ic}</div><div class="ph-name">${p.name}</div><div class="ph-sub">${p.sub}</div><div class="ph-soon">Photos bientôt</div></div>`;});}document.getElementById('gg').innerHTML=html;}
+function buildGal(filter){const catLabel=CAT;let items=filter==='all'?[...GAL]:GAL.filter(s=>s.cat===filter);let html=items.map(s=>`<div class="gc${chosen.has(s.id)?' chosen':''}" data-id="${s.id}" onclick="toggleCard(this,'${s.id}')"><img src="${s.img}" alt="${s.name}" loading="lazy"><div class="cat-lbl">${catLabel[s.cat]||s.cat.toUpperCase()}</div><button class="gc-pick" onclick="event.stopPropagation();toggleCard(this.closest('.gc'),'${s.id}')">${chosen.has(s.id)?'✓':'+ Choisir'}</button><div class="gc-lbl"><div class="gc-name">${s.name}</div><div class="gc-sub">${s.sub}</div></div></div>`).join('');if(filter==='all'||Object.keys(PH).includes(filter)){const phCats=filter==='all'?Object.keys(PH):[filter];phCats.forEach(cat=>{const p=PH[cat];if(!p)return;html+=`<div class="ph-card" style="background:${p.bg}"><div class="ph-ic">${p.ic}</div><div class="ph-name">${p.name}</div><div class="ph-sub">${p.sub}</div><div class="ph-soon">Photos bientôt</div></div>`;});}document.getElementById('gg').innerHTML=html;}
 function toggleCard(el,id){if(chosen.has(id)){chosen.delete(id);el.classList.remove('chosen')}else{chosen.add(id);el.classList.add('chosen')}S.styles=[...chosen].map(cid=>GAL.find(g=>g.id===cid)?.name).filter(Boolean);document.getElementById('btn-gal').disabled=chosen.size===0;el.querySelector('.gc-pick').textContent=chosen.has(id)?'✓':'+ Choisir';}
 function ft(el,cat){document.querySelectorAll('#tabs .tb').forEach(t=>t.classList.remove('on'));el.classList.add('on');buildGal(cat);}
 function pick(el,gid){document.querySelectorAll('#'+gid+' .chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');const m={'c-occ':'occasion','c-mor':'morpho','c-pal':'palette','c-sai':'saison','c-q':'question','c-bud':'budget'};if(m[gid])S[m[gid]]=el.textContent.trim();}
