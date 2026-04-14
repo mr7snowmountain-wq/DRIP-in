@@ -19,8 +19,8 @@ module.exports = async function handler(req, res) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           input: { text },
-          voice: { languageCode: 'fr-FR', name: 'fr-FR-Neural2-D' },
-          audioConfig: { audioEncoding: 'MP3', speakingRate: 1.08, pitch: 0.5 }
+          voice: { languageCode: 'fr-FR', name: 'fr-FR-Neural2-A' },
+          audioConfig: { audioEncoding: 'MP3', speakingRate: 1.08, pitch: 0.0 }
         })
       }
     );
