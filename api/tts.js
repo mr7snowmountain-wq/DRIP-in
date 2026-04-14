@@ -1,3 +1,22 @@
+function toSSML(text) {
+  const escaped = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  const ssml = escaped
+    .replace(/\.\.\./g, '<break time="450ms"/>')
+    .replace(/([!])\s/g, '$1<break time="380ms"/> ')
+    .replace(/([?])\s/g, '$1<break time="380ms"/> ')
+    .replace(/\.\s/g, '.<break time="350ms"/> ')
+    .replace(/,\s/g, ',<break time="180ms"/> ')
+    .replace(/\s—\s/g, '<break time="280ms"/> ')
+    .replace(/\s:\s/g, '<break time="220ms"/> ')
+    .replace(/;\s/g, ';<break time="280ms"/> ');
+
+  return `<speak><prosody rate="108%" pitch="+2st">${ssml}</prosody></speak>`;
+}
+
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -18,9 +37,9 @@ module.exports = async function handler(req, res) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          input: { text },
+          input: { ssml: toSSML(text) },
           voice: { languageCode: 'fr-FR', name: 'fr-FR-Neural2-A' },
-          audioConfig: { audioEncoding: 'MP3', speakingRate: 1.15, pitch: 3.0 }
+          audioConfig: { audioEncoding: 'MP3', speakingRate: 1.0, pitch: 2.0 }
         })
       }
     );
