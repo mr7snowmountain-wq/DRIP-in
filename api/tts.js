@@ -5,16 +5,15 @@ function toSSML(text) {
     .replace(/>/g, '&gt;');
 
   const ssml = escaped
-    .replace(/\.\.\./g, '<break time="450ms"/>')
-    .replace(/([!])\s/g, '$1<break time="380ms"/> ')
-    .replace(/([?])\s/g, '$1<break time="380ms"/> ')
-    .replace(/\.\s/g, '.<break time="350ms"/> ')
-    .replace(/,\s/g, ',<break time="180ms"/> ')
-    .replace(/\s—\s/g, '<break time="280ms"/> ')
-    .replace(/\s:\s/g, '<break time="220ms"/> ')
-    .replace(/;\s/g, ';<break time="280ms"/> ');
+    .replace(/\.\.\./g, '<break time="550ms"/>')
+    .replace(/!(\s|$)/g, '!<break time="450ms"/>$1')
+    .replace(/\?(\s|$)/g, '?<break time="450ms"/>$1')
+    .replace(/\.(\s|$)/g, '.<break time="420ms"/>$1')
+    .replace(/,(\s)/g, ',<break time="200ms"/>$1')
+    .replace(/\s—\s/g, '<break time="350ms"/>')
+    .replace(/\s:\s/g, '<break time="250ms"/>');
 
-  return `<speak><prosody rate="108%" pitch="+2st">${ssml}</prosody></speak>`;
+  return `<speak>${ssml}</speak>`;
 }
 
 module.exports = async function handler(req, res) {
