@@ -21,17 +21,12 @@
 <link rel="apple-touch-icon" href="/icon-192.png">
 <title>Drip'In — Connexion</title>
 <script>
-// Capture beforeinstallprompt le plus tôt possible
 window.__pwaPrompt = null;
 window.addEventListener('beforeinstallprompt', function(e) {
   e.preventDefault();
   window.__pwaPrompt = e;
-  if (!localStorage.getItem('pwa-dismissed')) {
-    var b = document.getElementById('pwa-banner');
-    var a = document.getElementById('pwa-android');
-    if (b) b.style.display = 'block';
-    if (a) a.style.display = 'flex';
-  }
+  // DOM peut ne pas exister encore — on appelle la fonction si elle est prête
+  if (typeof showPwaBanner === 'function') showPwaBanner('android');
 });
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
 </script>
@@ -272,22 +267,34 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Enter') handle
   </div>
 </div>
 <script>
-function dismissPwa(){ localStorage.setItem('pwa-dismissed','1'); document.getElementById('pwa-banner').style.display='none'; }
-function installApp(){
+const _isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+const _isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+
+function showPwaBanner(type) {
+  if (_isStandalone) return;
+  if (localStorage.getItem('pwa-dismissed')) return;
+  document.getElementById('pwa-banner').style.display = 'block';
+  if (type === 'android') document.getElementById('pwa-android').style.display = 'flex';
+  if (type === 'ios')     document.getElementById('pwa-ios').style.display = 'block';
+}
+
+function dismissPwa() {
+  localStorage.setItem('pwa-dismissed', '1');
+  document.getElementById('pwa-banner').style.display = 'none';
+}
+
+function installApp() {
   var p = window.__pwaPrompt;
-  if(!p) return;
+  if (!p) return;
   p.prompt();
-  p.userChoice.then(function(){ dismissPwa(); window.__pwaPrompt = null; });
+  p.userChoice.then(function() { dismissPwa(); window.__pwaPrompt = null; });
 }
-// Si le prompt a déjà été capturé dans le <head>, afficher la bannière maintenant
-if(window.__pwaPrompt && !localStorage.getItem('pwa-dismissed')){
-  document.getElementById('pwa-banner').style.display='block';
-  document.getElementById('pwa-android').style.display='flex';
-}
-const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
-if(isIOS && !window.navigator.standalone && !localStorage.getItem('pwa-dismissed')){
-  document.getElementById('pwa-banner').style.display='block';
-  document.getElementById('pwa-ios').style.display='block';
+
+// Au chargement : vérifier si le prompt a déjà été capturé dans le <head>
+if (window.__pwaPrompt) {
+  showPwaBanner('android');
+} else if (_isIOS) {
+  showPwaBanner('ios');
 }
 </script>
 </body>
