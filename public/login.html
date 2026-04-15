@@ -176,11 +176,16 @@ const sb = createClient(
   'https://cnrluaseqvkjumbfwhdp.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNucmx1YXNlcXZranVtYmZ3aGRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzNzgzMjIsImV4cCI6MjA5MDk1NDMyMn0.zd_TBAnsvUfGritEEoNkYVLc-9How0D6lyxvKe8Iht8'
 )
-let mode = 'login'
 let userEmail = ''
+// Nouvel utilisateur → inscription, retours suivants → connexion
+const _hasVisited = localStorage.getItem('dripin-visited')
+let mode = _hasVisited ? 'login' : 'signup'
+if (!_hasVisited) localStorage.setItem('dripin-visited', '1')
 sb.auth.getSession().then(({ data: { session } }) => {
   if (session) window.location.href = '/index.html'
 })
+// Appliquer le bon onglet au chargement
+switchTab(mode)
 function switchTab(m) {
   mode = m
   document.getElementById('tab-login').classList.toggle('on', m === 'login')
