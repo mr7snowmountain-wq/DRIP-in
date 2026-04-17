@@ -226,9 +226,17 @@ async function handleAuth() {
     if (error) { showMsg(friendlyError(error.message)); setLoading(false) }
     else window.location.href = '/index.html'
   } else {
-    const { error } = await sb.auth.signUp({ email, password })
+    const { data, error } = await sb.auth.signUp({ email, password })
     if (error) { showMsg(friendlyError(error.message)); setLoading(false) }
-    else { showMsg('Un email de confirmation a ete envoye !', 'ok'); setLoading(false); document.getElementById('btn-mail').classList.add('show') }
+    else if (data.session) {
+      // Email confirmation désactivée → accès direct
+      window.location.href = '/index.html'
+    } else {
+      // Email confirmation active → info douce + accès quand même après 2s
+      showMsg('✓ Compte créé ! Un email de bienvenue a été envoyé.', 'ok')
+      setLoading(false)
+      setTimeout(() => { window.location.href = '/index.html' }, 2000)
+    }
   }
 }
 function friendlyError(msg) {
