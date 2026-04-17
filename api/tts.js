@@ -13,14 +13,14 @@ module.exports = async function handler(req, res) {
 
   try {
     const response = await fetch(
-      `https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`,
+      `https://texttospeech.googleapis.com/v1beta1/text:synthesize?key=${apiKey}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           input: { text },
-          voice: { languageCode: 'fr-FR', name: 'fr-FR-Studio-A' },
-          audioConfig: { audioEncoding: 'MP3', speakingRate: 0.95, pitch: 0.0 }
+          voice: { languageCode: 'fr-FR', name: 'fr-FR-Chirp3-HD-Zephyr' },
+          audioConfig: { audioEncoding: 'MP3', speakingRate: 1.0, pitch: 0.0 }
         })
       }
     );
