@@ -1,7 +1,7 @@
 const { createClient } = require('@supabase/supabase-js');
 
 const FREE_LIMIT = 5;
-const PRO_LIMIT = 200;
+const PRO_LIMIT = 150;
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
